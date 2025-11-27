@@ -174,3 +174,20 @@ else()
         install(FILES "../macOS/abuse.icns" DESTINATION "${CMAKE_INSTALL_PREFIX}/abuse.app/Contents/Resources")
     endif()
 endif()
+
+# ============================================================================
+# Abuse 2025 Modern Launcher
+# ============================================================================
+# Creates abuse25.exe which enables all modern features by default
+
+add_executable(abuse25 WIN32 tool/abuse25_launcher.cpp)
+
+# Set subsystem to Windows (GUI app, no console)
+if(MSVC)
+    set_target_properties(abuse25 PROPERTIES
+        LINK_FLAGS "/SUBSYSTEM:WINDOWS /ENTRY:WinMainCRTStartup"
+    )
+endif()
+
+# Install to the same directory as the main executable
+install(TARGETS abuse25 DESTINATION ${CMAKE_INSTALL_BINDIR})
