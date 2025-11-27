@@ -19,3 +19,13 @@ AIWork/__pycache__/
 *.backup
 AIWork/SUPIR_v101/
 AIWork/SUPIR_v101.zip
+
+# Temporary markdown files
+*_COMPLETE.md
+*_PROGRESS.md
+*_STATUS.md
+*_SUMMARY.md
+WORKING_DIRECTORY.md
+DEPLOYMENT_SUMMARY.md
+*.md.original
+RELEASE_NOTES_*.md
