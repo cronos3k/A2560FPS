@@ -1512,6 +1512,17 @@ int game_object::mover(int cx, int cy, int button)  // return false if the route
 
   // see if the user said to jump (SPACEBAR, modified by W+wall proximity)
   // Allow jump from ground OR if wall jump is active
+
+  // DEBUG: Show jump gate status when spacebar pressed
+  if ((button & 8) && cy < 0)  // W+Spacebar
+  {
+    printf("[JUMP GATE] Spacebar+W pressed - button=%d, floating=%d, gravity=%d, wall_left=%d, wall_right=%d, enabled=%d\n",
+           button, floating(), gravity(), wall_nearby_left, wall_nearby_right, settings.wall_jump_enabled);
+    printf("[JUMP GATE] Condition check: (!gravity=%d || (enabled=%d && wall=%d && W=%d)) = %d\n",
+           !gravity(), settings.wall_jump_enabled, (wall_nearby_left || wall_nearby_right), cy < 0,
+           (!gravity() || (settings.wall_jump_enabled && (wall_nearby_left || wall_nearby_right) && cy < 0)));
+  }
+
   if ((button & 8) && !floating() && (!gravity() || (settings.wall_jump_enabled && (wall_nearby_left || wall_nearby_right) && cy < 0)))
   {
     int jump_height_multiplier = 1;

@@ -1,0 +1,4 @@
+interpolated_sprites_enabled=1
+wall_jump_enabled=1
+wall_coyote_frames=60
+wall_hang_hold_frames=12
