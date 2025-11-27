@@ -1466,7 +1466,8 @@ int game_object::mover(int cx, int cy, int button)  // return false if the route
   }
 
   // see if the user said to jump (SPACEBAR, modified by W+wall proximity)
-  if ((button & 8) && !floating() && !gravity())
+  // Allow jump from ground OR if wall jump is active
+  if ((button & 8) && !floating() && (!gravity() || (settings.wall_jump_enabled && (wall_nearby_left || wall_nearby_right) && cy < 0)))
   {
     int jump_height_multiplier = 1;
     int jump_width_multiplier = 1;
