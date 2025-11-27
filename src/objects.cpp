@@ -1417,8 +1417,8 @@ int game_object::mover(int cx, int cy, int button)  // return false if the route
     else if (xvel()<0) set_xvel(-get_ability(type(),jump_top_speed));
   } */
 
-  // see if the user said to jump
-  if ((cy<0 || (button & 8)) && !floating() && !gravity())
+  // see if the user said to jump (SPACEBAR ONLY - W key is for wall jump)
+  if ((button & 8) && !floating() && !gravity())
   {
     set_gravity(1);
     set_yvel(get_ability(type(),jump_yvel));
@@ -1465,8 +1465,9 @@ int game_object::mover(int cx, int cy, int button)  // return false if the route
     }    */
   }
   // ====== WALL JUMP MECHANICS (Non-destructive, optional) ======
-  // Simple wall jump: Press W near a wall to jump away from it
-  if (settings.wall_jump_enabled && gravity() && floating() == 0)
+  // Simple wall jump: Press W (up) near a wall to jump away from it
+  // W key is ONLY for wall jump, spacebar is for normal jump
+  if (settings.wall_jump_enabled && floating() == 0)
   {
     // Wall detection: check for solid foreground tiles adjacent to player
     int tw = the_game->ftile_width();
