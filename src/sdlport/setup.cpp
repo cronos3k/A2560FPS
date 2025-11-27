@@ -106,7 +106,7 @@ Settings::Settings()
     // frame pacing
     this->fps_limit = 60; // default cap; 0 = uncapped
     // gameplay tuning
-    this->wall_jump_enabled = false; // disable wall jump by default (non-destructive)
+    this->wall_jump_enabled = true; // ENABLE wall jump by default for testing
     this->wall_coyote_frames = 60; // 1s at 60 Hz by default
     this->wall_hang_hold_frames = 12; // ~0.2s at 60 Hz (adjust in config)
     this->wall_debug_overlay = false; // start with overlay hidden
