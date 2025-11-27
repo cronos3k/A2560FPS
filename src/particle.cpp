@@ -19,6 +19,8 @@
 #include "lisp.h"
 #include "cache.h"
 #include "jrand.h"
+// Light overlay API
+#include "video.h"
 
 
 static int total_pseqs=0;
@@ -162,9 +164,22 @@ void tick_panims()
 
 void draw_panims(view *v)
 {
+  if (LightOverlay_Enabled())
+  {
+    int width = v->m_bb.x - v->m_aa.x + 1;
+    int height = v->m_bb.y - v->m_aa.y + 1;
+    LightOverlay_AddViewRect(v->m_aa.x, v->m_aa.y, width, height);
+  }
   for (part_animation *p=first_anim; p; p=p->next)
   {
-    cache.part(p->seq->frames[p->frame])->draw(main_screen,p->x-v->xoff()+v->m_aa.x,p->y-v->yoff()+v->m_aa.y,p->dir);
+    int sx = p->x - v->xoff() + v->m_aa.x;
+    int sy = p->y - v->yoff() + v->m_aa.y;
+    cache.part(p->seq->frames[p->frame])->draw(main_screen, sx, sy, p->dir);
+    if (LightOverlay_Enabled())
+    {
+        // Add a small glow around particle positions
+        LightOverlay_AddRadialScreen(sx, sy, 12, 96, 255, 180, 64);
+    }
   }
 }
 

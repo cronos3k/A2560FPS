@@ -28,8 +28,33 @@ else()
     find_package(SDL2_mixer 2.0.0 REQUIRED)
     # For compatibility with vcpkg, configure SDL2_mixer as an imported shared library
     add_library(SDL2_mixer::SDL2_mixer SHARED IMPORTED)
-    set_property(TARGET SDL2_mixer::SDL2_mixer PROPERTY IMPORTED_LOCATION "${SDL2_MIXER_LIBRARY}")
+    # Many FindSDL2_mixer modules set SDL2_MIXER_LIBRARY to the import library on Windows
+    # (e.g., libSDL2_mixer.dll.a with MinGW). CMake expects IMPORTED_IMPLIB to point to
+    # that import library and IMPORTED_LOCATION to the DLL itself for SHARED IMPORTED
+    # targets on Windows. Adjust these properties accordingly when using MinGW.
     set_property(TARGET SDL2_mixer::SDL2_mixer PROPERTY INTERFACE_INCLUDE_DIRECTORIES "${SDL2_MIXER_INCLUDE_DIRS}")
+    if (WIN32)
+        # Default to treating SDL2_MIXER_LIBRARY as the import library
+        set_property(TARGET SDL2_mixer::SDL2_mixer PROPERTY IMPORTED_IMPLIB "${SDL2_MIXER_LIBRARY}")
+        if (MINGW)
+            # Derive the DLL path from the import library location: <root>/lib/libSDL2_mixer.dll.a -> <root>/bin/SDL2_mixer.dll
+            get_filename_component(_sdl2mixer_libdir "${SDL2_MIXER_LIBRARY}" DIRECTORY)
+            get_filename_component(_sdl2mixer_root "${_sdl2mixer_libdir}" DIRECTORY)
+            set(_sdl2mixer_dll "${_sdl2mixer_root}/bin/SDL2_mixer.dll")
+            if (EXISTS "${_sdl2mixer_dll}")
+                set_property(TARGET SDL2_mixer::SDL2_mixer PROPERTY IMPORTED_LOCATION "${_sdl2mixer_dll}")
+            else()
+                message(WARNING "SDL2_mixer DLL not found at ${_sdl2mixer_dll}; using import library path for IMPORTED_LOCATION")
+                set_property(TARGET SDL2_mixer::SDL2_mixer PROPERTY IMPORTED_LOCATION "${SDL2_MIXER_LIBRARY}")
+            endif()
+        else()
+            # Non-MinGW Windows: fall back to using the library path as location
+            set_property(TARGET SDL2_mixer::SDL2_mixer PROPERTY IMPORTED_LOCATION "${SDL2_MIXER_LIBRARY}")
+        endif()
+    else()
+        # Non-Windows platforms only need LOCATION
+        set_property(TARGET SDL2_mixer::SDL2_mixer PROPERTY IMPORTED_LOCATION "${SDL2_MIXER_LIBRARY}")
+    endif()
 endif()
 
 include(CheckIncludeFiles)
@@ -52,6 +77,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_BINARY_DI
 if(WIN32)
     # For Windows, just use whatever CMake wants
     set(ASSETDIR ".")
+    # Ensure code that references ASSETDIR compiles on Windows
+    add_compile_definitions(ASSETDIR="${ASSETDIR}")
 elseif(APPLE)
     # Under macOS, redirect to an app bundle
     set(ASSETDIR "abuse.app/Contents/Resources/data")

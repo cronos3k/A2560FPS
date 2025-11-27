@@ -350,8 +350,29 @@ void EventHandler::SysEvent(Event &ev)
 			ev.key = JK_F10;
 			break;
 
-		case SDLK_F11: // unused	
-			break;
+    case SDLK_F11: // Cycle FPS limit (uncapped -> 30 -> 60 -> 120 -> uncapped)
+        if (ev.type == EV_KEYRELEASE)
+        {
+            int next;
+            switch (settings.fps_limit)
+            {
+            case 0: next = 30; break;
+            case 30: next = 60; break;
+            case 60: next = 120; break;
+            default: next = 0; break;
+            }
+            settings.fps_limit = next;
+            if (next == 0)
+                the_game->show_help("FPS limit: uncapped");
+            else
+            {
+                char msg[64];
+                snprintf(msg, sizeof(msg), "FPS limit: %d", next);
+                the_game->show_help(msg);
+            }
+        }
+        ev.key = EV_SPURIOUS;
+        break;
 
 		case SDLK_F12: // unused
 			break;

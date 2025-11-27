@@ -1,0 +1,20 @@
+{
+  "MonsterMMORPG/SECourses_SUPIR/checkpoints/Juggernaut-11.safetensors": "33e58e86686f6b386c526682b5da9228ead4f91d994abd4b053442dc5b42719e",
+  "MonsterMMORPG/SECourses_SUPIR/checkpoints/Juggernaut-XL_v9_RunDiffusionPhoto_v2.safetensors": "c9e3e68f89b8e38689e1097d4be4573cf308de4e3fd044c64ca697bdb4aa8bca",
+  "MonsterMMORPG/SECourses_SUPIR/checkpoints/RealVisXL_V5.0_fp16.safetensors": "6a35a7855770ae9820a3c931d4964c3817b6d9e3c6f9c4dabb5b3a94e5643b80",
+  "MonsterMMORPG/SECourses_SUPIR/checkpoints/WildCardX_XL_Lightning.safetensors": "f53945ec37073832a4de3bf24dd4590ae2690352b61a4faa75f1ae3a70574e24",
+  "MonsterMMORPG/SECourses_SUPIR/clip-vit-large-patch14-336/pytorch_model.bin": "c6032c2e0caae3dc2d4fba35535fa6307dbb49df59c7e182b1bc4b3329b81801",
+  "MonsterMMORPG/SECourses_SUPIR/clip-vit-large-patch14-336/tf_model.h5": "d12828ca8f0f3c92194f277b7d893da7f2fb7824d0b99dedb305eb48eb46bb7f",
+  "MonsterMMORPG/SECourses_SUPIR/clip-vit-large-patch14/flax_model.msgpack": "156f677ed4495acd1ec7197249c091b85c240267c82f2f7f2e4eae4177931fed",
+  "MonsterMMORPG/SECourses_SUPIR/clip-vit-large-patch14/model.safetensors": "a2bf730a0c7debf160f7a6b50b3aaf3703e7e88ac73de7a314903141db026dcb",
+  "MonsterMMORPG/SECourses_SUPIR/clip-vit-large-patch14/pytorch_model.bin": "f1a17cdbe0f36fec524f5cafb1c261ea3bbbc13e346e0f74fc9eb0460dedd0d3",
+  "MonsterMMORPG/SECourses_SUPIR/clip-vit-large-patch14/tf_model.h5": "7f154e925c18270d662d28f6261523c2ff6e80f1f05292cb034db41d5951c7a4",
+  "MonsterMMORPG/SECourses_SUPIR/detection_Resnet50_Final.pth": "6d1de9c2944f2ccddca5f5e010ea5ae64a39845a86311af6fdf30841b0a5a16d",
+  "MonsterMMORPG/SECourses_SUPIR/llava-v1.5-7b/mm_projector.bin": "be33a3b477e091832a3c8a9fabf5769c43b4cb2c161fc8c464b7bb214f16143a",
+  "MonsterMMORPG/SECourses_SUPIR/llava-v1.5-7b/pytorch_model-00001-of-00002.bin": "492fdfa63cf314097d99da81a3586d54a97adc1471a0ae0535f5caa269b86314",
+  "MonsterMMORPG/SECourses_SUPIR/llava-v1.5-7b/pytorch_model-00002-of-00002.bin": "c0eb94eb3fa578a4c63567f2eca6b0acf6a44a891c257aca0df88ffa891de72e",
+  "MonsterMMORPG/SECourses_SUPIR/llava-v1.5-7b/tokenizer.model": "9e556afd44213b6bd1be2b850ebbbd98f5481437a8021afaf58ee7fb1818d347",
+  "MonsterMMORPG/SECourses_SUPIR/open_clip_pytorch_model.bin": "0d5318839ad03607c48055c45897c655a14c0276a79f6b867934ddd073760e39",
+  "MonsterMMORPG/SECourses_SUPIR/v0F.ckpt": "9d8906255e2a2cc97b52d95d575461eca2a8971647d5e3e763291965c3a35314",
+  "MonsterMMORPG/SECourses_SUPIR/v0Q.ckpt": "d7f418398bb024d0d3c779c4ee4e9f171eb072306093f5bcfb2bf096aa2738f8"
+}

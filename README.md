@@ -8,9 +8,9 @@ Experience revolutionary gameplay combining precision mouse aiming with fluid ke
 
 Available as libre software, with source code released under open licenses and game assets as non-commercial freeware. The original shareware content is public domain, making Abuse one of pioneers in accessible, community-supported gaming.
 
-Abuse 2025 is a modern port of the original game, updated to run on modern systems and with new features like high-resolution graphics, gamepad support, and more. This project is a continuation of the [Xenoveritas SDL2 port](https://github.com/Xenoveritas/abuse) and the [Abuse 1996 project](https://github.com/antrad/Abuse_1996). It aims to be the go-to version for playing Abuse on modern systems.
+Abuse 2025 is a modern port of the original game, updated to run on modern systems and with new features like high-resolution graphics, gamepad support, improved networking, and more. This project is a continuation of the [Xenoveritas SDL2 port](https://github.com/Xenoveritas/abuse) and the [Abuse 1996 project](https://github.com/antrad/Abuse_1996). It aims to be the go-to version for playing Abuse on modern systems.
 
-Currently multiplayer between different platforms and on Windows is not supported.
+**Multiplayer is now fully supported on all platforms, including Windows!** LAN multiplayer works across Windows, Linux, and macOS with automatic server discovery via UDP broadcast.
 
 # Table of Contents
 

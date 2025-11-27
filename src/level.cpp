@@ -703,8 +703,13 @@ int level::tick()
       c->configure_for_area(smallest);
 
 
-    o->move(c->x_suggestion,c->y_suggestion,c->b1_suggestion|(c->b2_suggestion<<1)|
-        (c->b3_suggestion<<2));
+    // Pack b1..b4 suggestions into the button bitfield; use bit 3 (1<<3) for jump
+    o->move(c->x_suggestion,
+            c->y_suggestion,
+            (c->b1_suggestion) |
+            (c->b2_suggestion << 1) |
+            (c->b3_suggestion << 2) |
+            (c->b4_suggestion << 3));
 
     if (o->otype!=current_start_type)
     {
@@ -2335,7 +2340,7 @@ int level::save(char const *filename, int save_all)
             }
 
             delete fp;
-#if (defined(__MACH__) || !defined(__APPLE__)) && (!defined(WIN32))
+#if (defined(__MACH__) || !defined(__APPLE__)) && (!defined(WIN32) && !defined(_WIN32))
             chmod( name, S_IRWXU | S_IRWXG | S_IRWXO );
 #endif
             write_cache_prof_info();

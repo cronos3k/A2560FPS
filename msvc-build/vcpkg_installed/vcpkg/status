@@ -1,0 +1,72 @@
+Package: vcpkg-cmake-config
+Version: 2024-05-23
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 75bdd2111e4adf0911dd6b550a19afb06bbccfaf8cce78d949a5c1bc7aef2c1a
+Status: install ok installed
+
+Package: vcpkg-cmake
+Version: 2024-04-23
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 5999ee9c996a8da08686c0fd548a6aba4d40e9232e205a5a6a3995fc120c7903
+Status: install ok installed
+
+Package: sdl2
+Version: 2.32.10
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: f0b1a7098bc3f1651ca37a353d1b52cb2493ef995999ef7ff401defcbcaeb229
+Description: Simple DirectMedia Layer is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware via OpenGL and Direct3D.
+Status: install ok installed
+
+Package: wavpack
+Version: 5.8.1
+Port-Version: 2
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 8c834ec2d5f97cd20d330551052af9490b697dad365d8e688b459fdccfa31923
+Description: WavPack encode/decode library, command-line programs, and several plugins
+Status: install ok installed
+
+Package: libogg
+Version: 1.3.6
+Port-Version: 1
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 9266e029690d572ee3a052f5dfadf419661c2ebfe73cd4a7a5aad92e8b7fccbd
+Description: Ogg is a multimedia container format, and the native file and stream format for the Xiph.org multimedia codecs.
+Status: install ok installed
+
+Package: libvorbis
+Version: 1.3.7
+Port-Version: 4
+Depends: libogg, vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 944cb360a4107b44f23b67f3b35ddfceed5f6977bad1e14565a61191995c2716
+Description: Ogg Vorbis is a fully open, non-proprietary, patent-and-royalty-free, general-purpose compressed audio format
+Status: install ok installed
+
+Package: sdl2-mixer
+Version: 2.8.1
+Port-Version: 2
+Depends: libvorbis, sdl2, vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 23311722b72c8f0260c9551a71ae2acf27d982c567b12eab409f95079feae8fd
+Description: Multi-channel audio mixer library for SDL.
+Default-Features: wavpack
+Status: install ok installed
+
+Package: sdl2-mixer
+Feature: wavpack
+Depends: wavpack
+Architecture: x64-windows
+Multi-Arch: same
+Description: Enable WavPack music.
+Status: install ok installed
+

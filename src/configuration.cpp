@@ -206,6 +206,7 @@ void get_movement(int player, int &x, int &y, int &b1, int &b2, int &b3, int &b4
             else
                 x = 0;
 
+            // Up arrow/W no longer triggers jump; it only signals upward intent
             if( is_pressed( key_map[player].up ) ||
                     is_pressed( key_map[player].up_2) )
                 y = -1;
@@ -213,6 +214,8 @@ void get_movement(int player, int &x, int &y, int &b1, int &b2, int &b3, int &b4
                     is_pressed( key_map[player].down_2) )
                 y = 1;
             else y = 0;
+
+            // Dedicated jump key: do NOT alter y; handle b4 (jump) below
 
             if( is_pressed( key_map[player].b1 ) )
                 b1 = 1;
@@ -229,7 +232,8 @@ void get_movement(int player, int &x, int &y, int &b1, int &b2, int &b3, int &b4
             else
                 b3 = 0;
 
-            if( is_pressed( key_map[player].b4 ) )
+            // b4 is repurposed as the dedicated jump action (default: Space)
+            if (is_pressed(settings.jump))
                 b4 = 1;
             else
                 b4 = 0;

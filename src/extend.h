@@ -16,6 +16,8 @@
 #define FLAG_JUST_BLOCKED 2
 #define FLOATING_FLAG     4
 #define KNOWN_FLAG        8
+// Player can latch onto a wall (custom gameplay feature)
+#define WALL_HANG_FLAG    16
 
 
 #include "lisp/lisp.h"
@@ -68,6 +70,18 @@ public:
 
   int keep_ai_info()         { return 1; }
   uint8_t flags()            { return Flags; }
+  // Helper accessors for wall-hang state
+  bool wall_hanging()        { return (flags() & WALL_HANG_FLAG) != 0; }
+  void set_wall_hanging(bool on)
+  {
+    if (on) set_flags(flags() | WALL_HANG_FLAG);
+    else    set_flags(flags() & ~WALL_HANG_FLAG);
+  }
+  // Wall-hang helpers: which side we last latched (-1 left, +1 right) and
+  // a short post-detach grace window (frames) to allow late wall jumps.
+  int8_t wall_side;     // -1 = left, +1 = right, 0 = none
+  uint8_t wall_coyote;  // frames remaining of wall-jump grace
+  uint8_t wall_hold;    // frames of continuous hold toward wall while falling
   int32_t xvel()             { return Xvel; }
   int32_t yvel()             { return Yvel; }
   int32_t xacel()            { return Xacel; }

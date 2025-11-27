@@ -3,10 +3,15 @@
 
 #include "common.h"
 
-#ifdef WIN32
+#if defined(_WIN32) || defined(WIN32)
 #include <io.h>
 #include <fcntl.h>
+// Ensure mode_t is available: MinGW provides it in <sys/types.h>, MSVC does not
+#if defined(__MINGW32__) || defined(__MINGW64__)
+#include <sys/types.h>
+#elif defined(_MSC_VER)
 typedef unsigned int mode_t;
+#endif
 
 // Define missing POSIX constants for Windows
 #ifndef O_ACCMODE

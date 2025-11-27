@@ -38,6 +38,45 @@ typedef enum
   LSABER = 7
 } WeaponType;
 
+static void add_weapon_glow(int weapon_type, int world_x, int world_y)
+{
+  if (!LightOverlay_Enabled())
+    return;
+
+  uint8_t r = 255, g = 200, b = 140;
+  int radius = 18;
+  uint8_t alpha = 140;
+
+  switch (weapon_type)
+  {
+    case PLASMA:
+      r = 90; g = 200; b = 255;
+      radius = 22;
+      alpha = 150;
+      break;
+    case GRENADE:
+    case FIREBOMB:
+      r = 255; g = 150; b = 60;
+      radius = 26;
+      alpha = 170;
+      break;
+    case ROCKET:
+      r = 255; g = 120; b = 40;
+      radius = 28;
+      alpha = 190;
+      break;
+    case LSABER:
+      r = 150; g = 80; b = 255;
+      radius = 16;
+      alpha = 130;
+      break;
+    default:
+      break;
+  }
+
+  LightOverlay_AddWorldGlow(world_x, world_y, radius, alpha, r, g, b);
+}
+
 signed char small_fire_off[24*2]=  // x & y offset from character to end of gun.
   { 17,20,     // 1
     17,23,     // 2
@@ -245,6 +284,8 @@ static int player_fire_weapon(game_object *o, int type, game_object *target, int
   other->lvars[just_fired]=1;
   other->x=ox;
   other->y=oy;
+
+  add_weapon_glow(type, x2, y2);
 
   return 1;
 }

@@ -1,0 +1,10 @@
+^D:\DEV\ABUSE_2025\MSVC-BUILD\CMAKEFILES\2B555CEBDB0129E313F4ACF725F91934\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/DEV/Abuse_2025 -BD:/DEV/Abuse_2025/msvc-build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/DEV/Abuse_2025/msvc-build/abuse.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

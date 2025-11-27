@@ -11,7 +11,7 @@
 #pragma once
 
 // Platform-specific includes
-#ifdef WIN32
+#if defined(_WIN32) || defined(WIN32)
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
@@ -19,6 +19,10 @@
 #include <Windows.h>
 #include <WS2tcpip.h> // For modern Windows Socket functions
 #include <iphlpapi.h> // For GetAdaptersAddresses
+// Avoid Windows macro collisions with method names (e.g., CreateWindow)
+#ifdef CreateWindow
+#undef CreateWindow
+#endif
 #pragma comment(lib, "ws2_32.lib")
 #pragma comment(lib, "iphlpapi.lib")
 

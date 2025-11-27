@@ -1,0 +1,303 @@
+{
+  "target_width": 32,
+  "target_height": 40,
+  "frames": [
+    {
+      "filename": "0.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "1.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "10.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "11.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "12.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "13.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "14.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "15.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "16.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "17.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "18.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "19.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "2.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "20.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "21.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "22.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "23.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "24.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "25.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "26.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "27.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "28.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "29.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "3.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "30.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "31.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "32.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "4.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "5.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "6.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "7.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "8.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    },
+    {
+      "filename": "9.png",
+      "original_width": 32,
+      "original_height": 40,
+      "pad_left": 0,
+      "pad_top": 0,
+      "normalized_width": 32,
+      "normalized_height": 40
+    }
+  ]
+}

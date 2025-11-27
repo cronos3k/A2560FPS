@@ -30,6 +30,13 @@ void set_mode(int argc=0, char **argv=NULL);
 void close_graphics();
 void update_window_done();
 
+// Light/glow overlay API (composited by SDL renderer)
+bool LightOverlay_Enabled();
+void LightOverlay_Clear(uint8_t alpha = 0);
+void LightOverlay_AddRadialScreen(int x, int y, int radius, uint8_t alpha,
+                                  uint8_t red = 255, uint8_t green = 255, uint8_t blue = 255);
+void LightOverlay_AddViewRect(int x, int y, int width, int height);
+
 void update_dirty(image *im, int xoff=0, int yoff=0);
 void put_part_image(image *im, int x, int y, int x1, int y1, int x2, int y2);
 void put_image(image * im, int x, int y);

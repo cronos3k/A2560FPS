@@ -1,0 +1,32 @@
+#include <Windows.h>
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     2025,1,0,0
+PRODUCTVERSION  2025,1,0,0
+FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
+FILEFLAGS       (VS_FF_PRIVATEBUILD|VS_FF_DEBUG|VS_FF_PRERELEASE)
+FILEOS          VOS__WINDOWS32
+FILETYPE        VFT_APP
+FILESUBTYPE     VFT_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "CompanyName", "Crack-Dot-Com"
+            VALUE "FileDescription", "Abuse game"
+            VALUE "FileVersion", "2025.1.0.0"
+            VALUE "InternalName", "abuse.exe"
+            VALUE "OriginalFilename", "abuse.exe"
+            VALUE "PrivateBuild", "Xenoveritas version from http://github.com/Xenoveritas/abuse"
+            VALUE "ProductName", "Abuse"
+            VALUE "ProductVersion", "2025.1.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+abuse ICON "D:/DEV/Abuse_2025/doc/icon.ico"

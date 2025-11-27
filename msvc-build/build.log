@@ -1,0 +1,20 @@
+MSBuild version 17.14.14+a129329f1 for .NET Framework
+
+  imlib.vcxproj -> D:\DEV\Abuse_2025\msvc-build\src\imlib\Release\imlib.lib
+  lisp.vcxproj -> D:\DEV\Abuse_2025\msvc-build\src\lisp\Release\lisp.lib
+  tcpip.cpp
+D:\DEV\Abuse_2025\src\net\tcpip.cpp(762,18): error C2039: 'broadcastable': is not a member of 'net_socket' [D:\DEV\Abuse_2025\msvc-build\src\net\net.vcxproj]
+      D:\DEV\Abuse_2025\src\net\sock.h(31,7):
+      see declaration of 'net_socket'
+  
+  sdlport.vcxproj -> D:\DEV\Abuse_2025\msvc-build\src\sdlport\Release\sdlport.lib
+  abuse-tool.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\wingdi.h(118,9): warning C4005: 'ERROR': macro redefinition [D:\DEV\Abuse_2025\msvc-build\src\abuse-tool.vcxproj]
+  (compiling source file '../../src/tool/abuse-tool.cpp')
+      D:\DEV\Abuse_2025\src\common.h(95,9):
+      see previous definition of 'ERROR'
+  
+D:\DEV\Abuse_2025\src\tool\AR_SPEC.h(62,10): error C1083: Cannot open include file: 'cv.h': No such file or directory [D:\DEV\Abuse_2025\msvc-build\src\abuse-tool.vcxproj]
+  (compiling source file '../../src/tool/abuse-tool.cpp')
+  
+  spe-dump.vcxproj -> D:\DEV\Abuse_2025\msvc-build\src\Release\spe-dump.exe

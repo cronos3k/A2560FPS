@@ -1,0 +1,11 @@
+# Python dependencies for AI frame interpolation experiments
+
+# Image processing
+Pillow>=10.0.0
+
+# RIFE dependencies (will be installed from Practical-RIFE/requirements.txt)
+# These are listed here for reference:
+# torch>=1.9.0
+# opencv-python>=4.5.0
+# numpy>=1.20.0
+# tqdm

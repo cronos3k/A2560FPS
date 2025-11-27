@@ -1,0 +1,110 @@
+{
+  "MonsterMMORPG/SECourses_SUPIR/checkpoints/Juggernaut-11.safetensors": {
+    "sha256": "33e58e86686f6b386c526682b5da9228ead4f91d994abd4b053442dc5b42719e",
+    "size": 7105350536,
+    "mtime": 1764230222.0210118,
+    "verified_at": 1764230226.3581598
+  },
+  "MonsterMMORPG/SECourses_SUPIR/checkpoints/Juggernaut-XL_v9_RunDiffusionPhoto_v2.safetensors": {
+    "sha256": "c9e3e68f89b8e38689e1097d4be4573cf308de4e3fd044c64ca697bdb4aa8bca",
+    "size": 7105348188,
+    "mtime": 1764230524.8497329,
+    "verified_at": 1764230529.2081623
+  },
+  "MonsterMMORPG/SECourses_SUPIR/checkpoints/RealVisXL_V5.0_fp16.safetensors": {
+    "sha256": "6a35a7855770ae9820a3c931d4964c3817b6d9e3c6f9c4dabb5b3a94e5643b80",
+    "size": 6938065488,
+    "mtime": 1764230814.585853,
+    "verified_at": 1764230818.9431589
+  },
+  "MonsterMMORPG/SECourses_SUPIR/checkpoints/WildCardX_XL_Lightning.safetensors": {
+    "sha256": "f53945ec37073832a4de3bf24dd4590ae2690352b61a4faa75f1ae3a70574e24",
+    "size": 6938040706,
+    "mtime": 1764231110.470307,
+    "verified_at": 1764231114.8628376
+  },
+  "MonsterMMORPG/SECourses_SUPIR/clip-vit-large-patch14-336/pytorch_model.bin": {
+    "sha256": "c6032c2e0caae3dc2d4fba35535fa6307dbb49df59c7e182b1bc4b3329b81801",
+    "size": 1711974081,
+    "mtime": 1764231195.4137633,
+    "verified_at": 1764231196.546153
+  },
+  "MonsterMMORPG/SECourses_SUPIR/clip-vit-large-patch14-336/tf_model.h5": {
+    "sha256": "d12828ca8f0f3c92194f277b7d893da7f2fb7824d0b99dedb305eb48eb46bb7f",
+    "size": 1712454232,
+    "mtime": 1764231270.1285625,
+    "verified_at": 1764231271.2401783
+  },
+  "MonsterMMORPG/SECourses_SUPIR/clip-vit-large-patch14/flax_model.msgpack": {
+    "sha256": "156f677ed4495acd1ec7197249c091b85c240267c82f2f7f2e4eae4177931fed",
+    "size": 1710486359,
+    "mtime": 1764231346.8131585,
+    "verified_at": 1764231347.932081
+  },
+  "MonsterMMORPG/SECourses_SUPIR/clip-vit-large-patch14/model.safetensors": {
+    "sha256": "a2bf730a0c7debf160f7a6b50b3aaf3703e7e88ac73de7a314903141db026dcb",
+    "size": 1710540580,
+    "mtime": 1764231428.7441566,
+    "verified_at": 1764231429.8804662
+  },
+  "MonsterMMORPG/SECourses_SUPIR/clip-vit-large-patch14/pytorch_model.bin": {
+    "sha256": "f1a17cdbe0f36fec524f5cafb1c261ea3bbbc13e346e0f74fc9eb0460dedd0d3",
+    "size": 1710671599,
+    "mtime": 1764231504.2480433,
+    "verified_at": 1764231505.372923
+  },
+  "MonsterMMORPG/SECourses_SUPIR/clip-vit-large-patch14/tf_model.h5": {
+    "sha256": "7f154e925c18270d662d28f6261523c2ff6e80f1f05292cb034db41d5951c7a4",
+    "size": 1711114176,
+    "mtime": 1764231580.1400561,
+    "verified_at": 1764231581.2732196
+  },
+  "MonsterMMORPG/SECourses_SUPIR/detection_Resnet50_Final.pth": {
+    "sha256": "6d1de9c2944f2ccddca5f5e010ea5ae64a39845a86311af6fdf30841b0a5a16d",
+    "size": 109497761,
+    "mtime": 1764231589.748793,
+    "verified_at": 1764231589.8223052
+  },
+  "MonsterMMORPG/SECourses_SUPIR/llava-v1.5-7b/mm_projector.bin": {
+    "sha256": "be33a3b477e091832a3c8a9fabf5769c43b4cb2c161fc8c464b7bb214f16143a",
+    "size": 41961085,
+    "mtime": 1764231595.5691986,
+    "verified_at": 1764231595.59971
+  },
+  "MonsterMMORPG/SECourses_SUPIR/llava-v1.5-7b/pytorch_model-00001-of-00002.bin": {
+    "sha256": "492fdfa63cf314097d99da81a3586d54a97adc1471a0ae0535f5caa269b86314",
+    "size": 9976634558,
+    "mtime": 1764232015.6705456,
+    "verified_at": 1764232022.0229414
+  },
+  "MonsterMMORPG/SECourses_SUPIR/llava-v1.5-7b/pytorch_model-00002-of-00002.bin": {
+    "sha256": "c0eb94eb3fa578a4c63567f2eca6b0acf6a44a891c257aca0df88ffa891de72e",
+    "size": 3542276251,
+    "mtime": 1764232165.406615,
+    "verified_at": 1764232167.650867
+  },
+  "MonsterMMORPG/SECourses_SUPIR/llava-v1.5-7b/tokenizer.model": {
+    "sha256": "9e556afd44213b6bd1be2b850ebbbd98f5481437a8021afaf58ee7fb1818d347",
+    "size": 499723,
+    "mtime": 1764232170.0623193,
+    "verified_at": 1764232170.06532
+  },
+  "MonsterMMORPG/SECourses_SUPIR/open_clip_pytorch_model.bin": {
+    "sha256": "0d5318839ad03607c48055c45897c655a14c0276a79f6b867934ddd073760e39",
+    "size": 10158638769,
+    "mtime": 1764232592.261125,
+    "verified_at": 1764232598.6483197
+  },
+  "MonsterMMORPG/SECourses_SUPIR/v0F.ckpt": {
+    "sha256": "9d8906255e2a2cc97b52d95d575461eca2a8971647d5e3e763291965c3a35314",
+    "size": 5329719950,
+    "mtime": 1764232823.7745137,
+    "verified_at": 1764232827.2787504
+  },
+  "MonsterMMORPG/SECourses_SUPIR/v0Q.ckpt": {
+    "sha256": "d7f418398bb024d0d3c779c4ee4e9f171eb072306093f5bcfb2bf096aa2738f8",
+    "size": 5329810432,
+    "mtime": 1764233040.9459856,
+    "verified_at": 1764233044.2955606
+  }
+}

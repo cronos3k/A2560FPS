@@ -1,0 +1,343 @@
+MSBuild version 17.14.14+a129329f1 for .NET Framework
+
+  imlib.vcxproj -> D:\DEV\Abuse_2025\msvc-build\src\imlib\Release\imlib.lib
+  lisp.vcxproj -> D:\DEV\Abuse_2025\msvc-build\src\lisp\Release\lisp.lib
+  net.vcxproj -> D:\DEV\Abuse_2025\msvc-build\src\net\Release\net.lib
+  sdlport.vcxproj -> D:\DEV\Abuse_2025\msvc-build\src\sdlport\Release\sdlport.lib
+  objects.cpp
+D:\DEV\Abuse_2025\src\level.h(106,33): warning C4353: nonstandard extension used: constant 0 as function expression.  Use '__noop' function intrinsic instead [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/objects.cpp')
+  
+D:\DEV\Abuse_2025\src\level.h(108,45): warning C4353: nonstandard extension used: constant 0 as function expression.  Use '__noop' function intrinsic instead [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/objects.cpp')
+  
+D:\DEV\Abuse_2025\src\level.h(113,34): warning C4353: nonstandard extension used: constant 0 as function expression.  Use '__noop' function intrinsic instead [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/objects.cpp')
+  
+D:\DEV\Abuse_2025\src\level.h(117,33): warning C4353: nonstandard extension used: constant 0 as function expression.  Use '__noop' function intrinsic instead [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/objects.cpp')
+  
+D:\DEV\Abuse_2025\src\level.h(118,33): warning C4353: nonstandard extension used: constant 0 as function expression.  Use '__noop' function intrinsic instead [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/objects.cpp')
+  
+D:\DEV\Abuse_2025\src\objects.cpp(32,10): error C1083: Cannot open include file: 'setup.h': No such file or directory [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  interp_loader.cpp
+D:\DEV\Abuse_2025\src\imlib\palette.h(71,8): error C2039: 'string': is not a member of 'std' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt\stddef.h(23,15):
+      see declaration of 'std'
+  
+D:\DEV\Abuse_2025\src\imlib\palette.h(71,15): error C3646: 'ar_name': unknown override specifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\palette.h(71,8): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(27,16): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(39,11): error C3646: 'm_aa': unknown override specifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(39,15): error C2059: syntax error: ',' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(39,21): error C2238: unexpected token(s) preceding ';' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(29,9): error C2065: 'm_aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(29,16): error C2065: 'aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(30,9): error C2065: 'm_bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(30,16): error C2065: 'bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(31,15): error C2065: 'bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(31,21): error C2065: 'aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(36,36): error C2039: 'm_aa': is not a member of 'dirty_rect' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+      D:\DEV\Abuse_2025\src\imlib\image.h(24,7):
+      see declaration of 'dirty_rect'
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(36,45): error C2065: 'm_aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(51,22): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(61,18): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(65,18): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(82,19): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(83,22): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(84,17): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(92,11): error C3646: 'm_size': unknown override specifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(92,17): error C2059: syntax error: ',' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(92,29): error C2238: unexpected token(s) preceding ';' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(52,43): error C2065: 'm_aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(52,35): error C3861: 'Max': identifier not found [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(53,43): error C2065: 'm_aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(53,35): error C3861: 'Max': identifier not found [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(54,43): error C2065: 'm_bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(54,35): error C3861: 'Min': identifier not found [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(55,43): error C2065: 'm_bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(55,35): error C3861: 'Min': identifier not found [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(56,35): error C2065: 'm_aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(57,35): error C2065: 'm_aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(58,35): error C2065: 'm_bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(59,35): error C2065: 'm_bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(63,9): error C2065: 'aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(63,14): error C2065: 'm_aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(63,20): error C2065: 'bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(63,25): error C2065: 'm_bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(67,9): error C2065: 'm_aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(67,20): error C2065: 'aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(67,24): error C3861: 'ivec2': identifier not found [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(67,16): error C3861: 'Max': identifier not found [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(68,9): error C2065: 'm_bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(68,24): error C2065: 'bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(68,28): error C2065: 'm_aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(68,35): error C3861: 'ivec2': identifier not found [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(68,20): error C3861: 'Max': identifier not found [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(68,46): error C2065: 'm_size': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(68,16): error C3861: 'Min': identifier not found [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(72,14): error C2065: 'm_aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(72,27): error C2065: 'm_aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(72,40): error C2065: 'm_bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(72,53): error C2065: 'm_bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(78,9): error C2065: 'm_aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(78,18): error C3861: 'Max': identifier not found [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(78,30): error C2065: 'm_aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(78,39): error C3861: 'Max': identifier not found [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(79,9): error C2065: 'm_bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(79,26): error C2065: 'm_size': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(79,18): error C3861: 'Min': identifier not found [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(79,37): error C2065: 'm_bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(79,54): error C2065: 'm_size': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(79,46): error C3861: 'Min': identifier not found [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(86,9): error C2065: 'm_size': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(86,18): error C2065: 'size': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(87,9): error C2065: 'm_aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(87,16): error C3861: 'ivec2': identifier not found [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(88,9): error C2065: 'm_bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(88,16): error C2065: 'size': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(99,11): error C3646: 'm_size': unknown override specifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(99,5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(102,19): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(110,11): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(116,19): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(117,19): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(126,11): error C3646: 'Size': unknown override specifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(126,15): error C2059: syntax error: '(' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(126,24): error C2334: unexpected token(s) preceding '{'; skipping apparent function body [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(130,34): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(131,33): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(134,14): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(136,20): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(138,15): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(139,20): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(142,18): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(143,18): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(144,17): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(158,19): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(162,22): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(171,16): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(172,18): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(180,7): error C2039: 'string': is not a member of 'std' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\ucrt\stddef.h(23,15):
+      see declaration of 'std'
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(180,14): error C3646: 'ar_name': unknown override specifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(180,21): error C2059: syntax error: ',' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(180,32): error C2238: unexpected token(s) preceding ';' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(121,29): error C2065: 'm_size': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(160,44): error C2065: 'aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(160,48): error C2065: 'bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(164,46): error C2065: 'aa': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\image.h(164,50): error C2065: 'bb': undeclared identifier [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\filter.h(28,45): error C2061: syntax error: identifier 'ivec2' [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+D:\DEV\Abuse_2025\src\imlib\filter.h(28,45): error C1003: error count exceeds 100; stopping compilation [D:\DEV\Abuse_2025\msvc-build\src\abuse.vcxproj]
+  (compiling source file '../../src/interp_loader.cpp')
+  
+  Generating Code...

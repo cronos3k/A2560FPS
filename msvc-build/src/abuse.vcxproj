@@ -1,0 +1,588 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{419AF349-6D34-37F5-861F-A12CD06F29F4}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <VcpkgEnabled>false</VcpkgEnabled>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>abuse</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="do_not_import_user.props" Condition="exists('do_not_import_user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\DEV\Abuse_2025\msvc-build\src\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">abuse.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">abuse</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\DEV\Abuse_2025\msvc-build\src\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">abuse.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">abuse</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\DEV\Abuse_2025\msvc-build\src\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">abuse.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">abuse</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\DEV\Abuse_2025\msvc-build\src\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">abuse.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">abuse</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\DEV\Abuse_2025\msvc-build;D:\DEV\Abuse_2025\src;D:\DEV\Abuse_2025\src\lisp;D:\DEV\Abuse_2025\src\imlib;D:\DEV\Abuse_2025\src\net;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/AIDEV/Abuse_2025/vcpkg_installed/x64-windows/include/SDL2" /external:I "D:/AIDEV/Abuse_2025/vcpkg_installed/x64-windows/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;ASSETDIR=".";PACKAGE_NAME="abuse";PACKAGE_VERSION="2025.1.0.0";HAVE_CONFIG_H;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;ASSETDIR=\".\";PACKAGE_NAME=\"abuse\";PACKAGE_VERSION=\"2025.1.0.0\";HAVE_CONFIG_H;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\DEV\Abuse_2025\msvc-build;D:\DEV\Abuse_2025\src;D:\DEV\Abuse_2025\src\lisp;D:\DEV\Abuse_2025\src\imlib;D:\DEV\Abuse_2025\src\net;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\include\SDL2;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\DEV\Abuse_2025\msvc-build;D:\DEV\Abuse_2025\src;D:\DEV\Abuse_2025\src\lisp;D:\DEV\Abuse_2025\src\imlib;D:\DEV\Abuse_2025\src\net;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\include\SDL2;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>		</Message>
+      <Command>setlocal
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/DEV/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary D:/DEV/Abuse_2025/msvc-build/src/Debug/abuse.exe -installedDir D:/DEV/Abuse_2025/msvc-build/vcpkg_installed/x64-windows/debug/bin -OutVariable out
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different D:/AIDEV/Abuse_2025/vcpkg_installed/x64-windows/debug/bin/SDL2_mixerd.dll D:/AIDEV/Abuse_2025/vcpkg_installed/x64-windows/debug/bin/SDL2d.dll D:/DEV/Abuse_2025/msvc-build/src/Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -D BIN=D:/DEV/Abuse_2025/msvc-build/src/Debug/abuse.exe -D DEST=D:/DEV/Abuse_2025/msvc-build/src/Debug -D RUNTIME_DIRS=\"D:/DEV/Abuse_2025/msvc-build/src/Release D:/DEV/Abuse_2025/msvc-build/src/Debug D:/DEV/Abuse_2025/msvc-build/vcpkg_installed/x64-windows/bin\" -P D:/DEV/Abuse_2025/cmake/bundle_runtime.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>lisp\Debug\lisp.lib;sdlport\Debug\sdlport.lib;imlib\Debug\imlib.lib;net\Debug\net.lib;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\debug\lib\SDL2_mixerd.lib;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\debug\lib\SDL2d.lib;ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/DEV/Abuse_2025/msvc-build/src/Debug/abuse.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/DEV/Abuse_2025/msvc-build/src/Debug/abuse.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\DEV\Abuse_2025\msvc-build;D:\DEV\Abuse_2025\src;D:\DEV\Abuse_2025\src\lisp;D:\DEV\Abuse_2025\src\imlib;D:\DEV\Abuse_2025\src\net;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/AIDEV/Abuse_2025/vcpkg_installed/x64-windows/include/SDL2" /external:I "D:/AIDEV/Abuse_2025/vcpkg_installed/x64-windows/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;ASSETDIR=".";PACKAGE_NAME="abuse";PACKAGE_VERSION="2025.1.0.0";HAVE_CONFIG_H;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;ASSETDIR=\".\";PACKAGE_NAME=\"abuse\";PACKAGE_VERSION=\"2025.1.0.0\";HAVE_CONFIG_H;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\DEV\Abuse_2025\msvc-build;D:\DEV\Abuse_2025\src;D:\DEV\Abuse_2025\src\lisp;D:\DEV\Abuse_2025\src\imlib;D:\DEV\Abuse_2025\src\net;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\include\SDL2;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\DEV\Abuse_2025\msvc-build;D:\DEV\Abuse_2025\src;D:\DEV\Abuse_2025\src\lisp;D:\DEV\Abuse_2025\src\imlib;D:\DEV\Abuse_2025\src\net;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\include\SDL2;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>		</Message>
+      <Command>setlocal
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/DEV/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary D:/DEV/Abuse_2025/msvc-build/src/Release/abuse.exe -installedDir D:/DEV/Abuse_2025/msvc-build/vcpkg_installed/x64-windows/bin -OutVariable out
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different D:/AIDEV/Abuse_2025/vcpkg_installed/x64-windows/bin/SDL2_mixer.dll D:/AIDEV/Abuse_2025/vcpkg_installed/x64-windows/bin/SDL2.dll D:/DEV/Abuse_2025/msvc-build/src/Release
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -D BIN=D:/DEV/Abuse_2025/msvc-build/src/Release/abuse.exe -D DEST=D:/DEV/Abuse_2025/msvc-build/src/Release -D RUNTIME_DIRS=\"D:/DEV/Abuse_2025/msvc-build/src/Release D:/DEV/Abuse_2025/msvc-build/src/Debug D:/DEV/Abuse_2025/msvc-build/vcpkg_installed/x64-windows/bin\" -P D:/DEV/Abuse_2025/cmake/bundle_runtime.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>lisp\Release\lisp.lib;sdlport\Release\sdlport.lib;imlib\Release\imlib.lib;net\Release\net.lib;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\lib\SDL2_mixer.lib;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\lib\SDL2.lib;ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/DEV/Abuse_2025/msvc-build/src/Release/abuse.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/DEV/Abuse_2025/msvc-build/src/Release/abuse.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\DEV\Abuse_2025\msvc-build;D:\DEV\Abuse_2025\src;D:\DEV\Abuse_2025\src\lisp;D:\DEV\Abuse_2025\src\imlib;D:\DEV\Abuse_2025\src\net;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/AIDEV/Abuse_2025/vcpkg_installed/x64-windows/include/SDL2" /external:I "D:/AIDEV/Abuse_2025/vcpkg_installed/x64-windows/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;ASSETDIR=".";PACKAGE_NAME="abuse";PACKAGE_VERSION="2025.1.0.0";HAVE_CONFIG_H;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;ASSETDIR=\".\";PACKAGE_NAME=\"abuse\";PACKAGE_VERSION=\"2025.1.0.0\";HAVE_CONFIG_H;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\DEV\Abuse_2025\msvc-build;D:\DEV\Abuse_2025\src;D:\DEV\Abuse_2025\src\lisp;D:\DEV\Abuse_2025\src\imlib;D:\DEV\Abuse_2025\src\net;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\include\SDL2;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\DEV\Abuse_2025\msvc-build;D:\DEV\Abuse_2025\src;D:\DEV\Abuse_2025\src\lisp;D:\DEV\Abuse_2025\src\imlib;D:\DEV\Abuse_2025\src\net;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\include\SDL2;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>		</Message>
+      <Command>setlocal
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/DEV/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary D:/DEV/Abuse_2025/msvc-build/src/MinSizeRel/abuse.exe -installedDir D:/DEV/Abuse_2025/msvc-build/vcpkg_installed/x64-windows/bin -OutVariable out
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different D:/AIDEV/Abuse_2025/vcpkg_installed/x64-windows/bin/SDL2_mixer.dll D:/AIDEV/Abuse_2025/vcpkg_installed/x64-windows/bin/SDL2.dll D:/DEV/Abuse_2025/msvc-build/src/MinSizeRel
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -D BIN=D:/DEV/Abuse_2025/msvc-build/src/MinSizeRel/abuse.exe -D DEST=D:/DEV/Abuse_2025/msvc-build/src/MinSizeRel -D RUNTIME_DIRS=\"D:/DEV/Abuse_2025/msvc-build/src/Release D:/DEV/Abuse_2025/msvc-build/src/Debug D:/DEV/Abuse_2025/msvc-build/vcpkg_installed/x64-windows/bin\" -P D:/DEV/Abuse_2025/cmake/bundle_runtime.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>lisp\MinSizeRel\lisp.lib;sdlport\MinSizeRel\sdlport.lib;imlib\MinSizeRel\imlib.lib;net\MinSizeRel\net.lib;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\lib\SDL2_mixer.lib;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\lib\SDL2.lib;ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/DEV/Abuse_2025/msvc-build/src/MinSizeRel/abuse.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/DEV/Abuse_2025/msvc-build/src/MinSizeRel/abuse.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\DEV\Abuse_2025\msvc-build;D:\DEV\Abuse_2025\src;D:\DEV\Abuse_2025\src\lisp;D:\DEV\Abuse_2025\src\imlib;D:\DEV\Abuse_2025\src\net;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/AIDEV/Abuse_2025/vcpkg_installed/x64-windows/include/SDL2" /external:I "D:/AIDEV/Abuse_2025/vcpkg_installed/x64-windows/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;ASSETDIR=".";PACKAGE_NAME="abuse";PACKAGE_VERSION="2025.1.0.0";HAVE_CONFIG_H;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;ASSETDIR=\".\";PACKAGE_NAME=\"abuse\";PACKAGE_VERSION=\"2025.1.0.0\";HAVE_CONFIG_H;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\DEV\Abuse_2025\msvc-build;D:\DEV\Abuse_2025\src;D:\DEV\Abuse_2025\src\lisp;D:\DEV\Abuse_2025\src\imlib;D:\DEV\Abuse_2025\src\net;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\include\SDL2;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\DEV\Abuse_2025\msvc-build;D:\DEV\Abuse_2025\src;D:\DEV\Abuse_2025\src\lisp;D:\DEV\Abuse_2025\src\imlib;D:\DEV\Abuse_2025\src\net;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\include\SDL2;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>		</Message>
+      <Command>setlocal
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/DEV/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary D:/DEV/Abuse_2025/msvc-build/src/RelWithDebInfo/abuse.exe -installedDir D:/DEV/Abuse_2025/msvc-build/vcpkg_installed/x64-windows/bin -OutVariable out
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_if_different D:/AIDEV/Abuse_2025/vcpkg_installed/x64-windows/bin/SDL2_mixer.dll D:/AIDEV/Abuse_2025/vcpkg_installed/x64-windows/bin/SDL2.dll D:/DEV/Abuse_2025/msvc-build/src/RelWithDebInfo
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -D BIN=D:/DEV/Abuse_2025/msvc-build/src/RelWithDebInfo/abuse.exe -D DEST=D:/DEV/Abuse_2025/msvc-build/src/RelWithDebInfo -D RUNTIME_DIRS=\"D:/DEV/Abuse_2025/msvc-build/src/Release D:/DEV/Abuse_2025/msvc-build/src/Debug D:/DEV/Abuse_2025/msvc-build/vcpkg_installed/x64-windows/bin\" -P D:/DEV/Abuse_2025/cmake/bundle_runtime.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>lisp\RelWithDebInfo\lisp.lib;sdlport\RelWithDebInfo\sdlport.lib;imlib\RelWithDebInfo\imlib.lib;net\RelWithDebInfo\net.lib;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\lib\SDL2_mixer.lib;D:\AIDEV\Abuse_2025\vcpkg_installed\x64-windows\lib\SDL2.lib;ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/DEV/Abuse_2025/msvc-build/src/RelWithDebInfo/abuse.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/DEV/Abuse_2025/msvc-build/src/RelWithDebInfo/abuse.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\DEV\Abuse_2025\src\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/DEV/Abuse_2025/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/DEV/Abuse_2025 -BD:/DEV/Abuse_2025/msvc-build --check-stamp-file D:/DEV/Abuse_2025/msvc-build/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\DEV\Abuse_2025\src\win32\resources.rc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\DEV\Abuse_2025\msvc-build\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/DEV/Abuse_2025/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/DEV/Abuse_2025 -BD:/DEV/Abuse_2025/msvc-build --check-stamp-file D:/DEV/Abuse_2025/msvc-build/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\DEV\Abuse_2025\src\win32\resources.rc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\DEV\Abuse_2025\msvc-build\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/DEV/Abuse_2025/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/DEV/Abuse_2025 -BD:/DEV/Abuse_2025/msvc-build --check-stamp-file D:/DEV/Abuse_2025/msvc-build/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\DEV\Abuse_2025\src\win32\resources.rc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\DEV\Abuse_2025\msvc-build\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/DEV/Abuse_2025/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/DEV/Abuse_2025 -BD:/DEV/Abuse_2025/msvc-build --check-stamp-file D:/DEV/Abuse_2025/msvc-build/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\DEV\Abuse_2025\src\win32\resources.rc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\DEV\Abuse_2025\msvc-build\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\DEV\Abuse_2025\src\common.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\file_utils.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\file_utils.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\lol\matrix.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\lol\matrix.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\lol\timer.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\lol\timer.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\specache.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\specache.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\netcfg.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\netcfg.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\innet.cpp" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\chat.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\chat.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\endgame.cpp" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\loadgame.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\loadgame.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\profile.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\profile.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\cop.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\cop.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\statbar.cpp" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\compiled.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\compiled.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\ant.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\ant.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\sensor.cpp" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\demo.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\demo.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\nfclient.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\nfclient.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\clisp.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\clisp.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\gui.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\gui.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\transp.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\transp.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\collide.cpp" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\property.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\property.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\cache.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\cache.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\particle.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\particle.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\objects.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\objects.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\extend.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\extend.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\console.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\console.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\ability.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\ability.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\items.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\items.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\dev.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\dev.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\chars.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\chars.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\level.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\level.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\smallfnt.cpp" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\automap.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\automap.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\help.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\help.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\intsect.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\intsect.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\loader2.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\loader2.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\seq.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\seq.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\points.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\points.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\fnt6x13.cpp" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\morpher.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\morpher.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\menu.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\menu.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\director.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\director.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\view.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\view.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\configuration.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\configuration.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\game.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\game.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\light.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\light.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\devsel.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\devsel.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\crc.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\crc.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\gamma.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\gamma.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\interp_loader.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\interp_loader.h" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\id.h" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\isllist.h" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\sbar.h" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\nfserver.h" />
+    <ClCompile Include="D:\DEV\Abuse_2025\src\ui\volumewindow.cpp" />
+    <ClInclude Include="D:\DEV\Abuse_2025\src\ui\volumewindow.h" />
+    <ResourceCompile Include="D:\DEV\Abuse_2025\msvc-build\src\resources.rc" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="D:\DEV\Abuse_2025\msvc-build\ZERO_CHECK.vcxproj">
+      <Project>{CDD3A5A6-736B-3271-A389-7DF80CD4DE88}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\DEV\Abuse_2025\msvc-build\src\imlib\imlib.vcxproj">
+      <Project>{E9B9AEF3-3E84-39B1-ACDD-5DB71A3BF351}</Project>
+      <Name>imlib</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\DEV\Abuse_2025\msvc-build\src\lisp\lisp.vcxproj">
+      <Project>{1A495A1B-711D-3485-9A58-2352170645CD}</Project>
+      <Name>lisp</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\DEV\Abuse_2025\msvc-build\src\net\net.vcxproj">
+      <Project>{18D0CCD6-28D6-384B-8CD6-945B348060E2}</Project>
+      <Name>net</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\DEV\Abuse_2025\msvc-build\src\sdlport\sdlport.vcxproj">
+      <Project>{AA4F0C22-4313-3581-A45D-D847112D8EB0}</Project>
+      <Name>sdlport</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

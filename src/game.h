@@ -68,6 +68,9 @@ extern int32_t current_vxadd,current_vyadd;
 extern int frame_panic,massive_frame_panic;
 extern int demo_start,idle_ticks;
 
+void LightOverlay_AddWorldGlow(int world_x, int world_y, int radius, uint8_t alpha = 128,
+                               uint8_t red = 255, uint8_t green = 255, uint8_t blue = 255);
+
 class Game
 {
 public:

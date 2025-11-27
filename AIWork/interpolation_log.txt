@@ -1,0 +1,77 @@
+🎬 RIFE Sprite Animation Interpolation
+
+✅ RIFE setup verified
+Found 4 sprite collections:
+
+📁 Processing: aliens
+  Input: 143 frames
+  Multiplier: 4x
+  Expected output: ~572 frames
+  🎬 Running RIFE interpolation...
+❌ RIFE failed:
+
+  0%|          | 0/143 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "D:\DEV\Abuse_2025\AIWork\Practical-RIFE\inference_video.py", line 205, in <module>
+    I1 = torch.from_numpy(np.transpose(lastframe, (2,0,1))).to(device, non_blocking=True).unsqueeze(0).float() / 255.
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+
+📁 Processing: bigexp
+  Input: 7 frames
+  Multiplier: 4x
+  Expected output: ~28 frames
+  🎬 Running RIFE interpolation...
+❌ RIFE failed:
+
+  0%|          | 0/7 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "D:\DEV\Abuse_2025\AIWork\Practical-RIFE\inference_video.py", line 205, in <module>
+    I1 = torch.from_numpy(np.transpose(lastframe, (2,0,1))).to(device, non_blocking=True).unsqueeze(0).float() / 255.
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+
+📁 Processing: droid
+  Input: 33 frames
+  Multiplier: 4x
+  Expected output: ~132 frames
+  🎬 Running RIFE interpolation...
+❌ RIFE failed:
+
+  0%|          | 0/33 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "D:\DEV\Abuse_2025\AIWork\Practical-RIFE\inference_video.py", line 205, in <module>
+    I1 = torch.from_numpy(np.transpose(lastframe, (2,0,1))).to(device, non_blocking=True).unsqueeze(0).float() / 255.
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+
+📁 Processing: fire
+  Input: 33 frames
+  Multiplier: 4x
+  Expected output: ~132 frames
+  🎬 Running RIFE interpolation...
+❌ RIFE failed:
+
+  0%|          | 0/33 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "D:\DEV\Abuse_2025\AIWork\Practical-RIFE\inference_video.py", line 205, in <module>
+    I1 = torch.from_numpy(np.transpose(lastframe, (2,0,1))).to(device, non_blocking=True).unsqueeze(0).float() / 255.
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+
+
+✅ Successfully interpolated 0/4 collections
+
+📂 Interpolated frames saved to: frame-interpolation\interpolated

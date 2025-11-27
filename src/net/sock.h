@@ -57,6 +57,10 @@ public:
   virtual void write_unselectable()
   {
   }
+  virtual void broadcastable()
+  {
+    // Default: no-op for sockets that don't support broadcast
+  }
   virtual int listen(int port) { return 0; }
   virtual net_socket *accept(net_address *&from)
   {

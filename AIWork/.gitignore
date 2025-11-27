@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+
+# RIFE repository
+Practical-RIFE/
+ECCV2022-RIFE/
+
+# Generated frames
+frame-interpolation/png-frames/
+frame-interpolation/interpolated/
+frame-interpolation/comparisons/
+
+# Model weights (large files)
+*.pkl
+*.pth
+*.onnx
+
+# OS
+.DS_Store
+Thumbs.db

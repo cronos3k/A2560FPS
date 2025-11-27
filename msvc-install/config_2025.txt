@@ -1,0 +1,61 @@
+; Abuse 2025 - Modern Configuration
+; This config enables all modern features for the best experience
+
+; SCREEN
+screen_width=1920
+screen_height=1080
+virtual_width=640
+virtual_height=480
+fullscreen=0
+borderless=1
+vsync=1
+linear_filter=1
+hires=1
+
+; FRAME PACING
+fps_limit=60
+
+; GAMEPLAY - MODERN FEATURES ENABLED
+; Enable wall jump mechanics (optional gameplay feature)
+wall_jump_enabled=1
+; Wall jump grace window after letting go of the wall (frames)
+wall_coyote_frames=60
+; Hold toward-wall time before latching (frames)
+wall_hang_hold_frames=12
+
+; DEBUG
+; Show wall-hang debug overlay (Alt+N toggles in-game)
+wall_debug_overlay=0
+; Enable light/glow overlay for particles/explosions
+lights_overlay_enabled=1
+; Enable AI-interpolated 60 FPS sprite animations (requires interpolated sprite data in AIWork/frame-interpolation/final/)
+interpolated_sprites_enabled=1
+
+; SOUND
+mono=0
+no_sound=0
+no_music=0
+volume_sound=127
+volume_music=127
+soundfont=AWE64 Gold Presets.sf2
+
+; CONTROLS - MODERN LAYOUT
+left=a
+right=d
+up=w
+down=s
+special=SHIFT_L
+fire=f
+weapon_prev=q
+weapon_next=e
+special2=CTRL_L
+; Dedicated jump key (spacebar)
+jump=SPACE
+
+; MISC
+local_save=1
+grab_input=0
+editor=0
+bullet_time_add=50
+player_touching_console=1
+

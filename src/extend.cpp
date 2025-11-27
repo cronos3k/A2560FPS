@@ -148,6 +148,9 @@ simple_object::simple_object()
   _team = -1;
   grav_on=1;
   targetable_on=1;
+  wall_side = 0;
+  wall_coyote = 0;
+  wall_hold = 0;
 }
 
 

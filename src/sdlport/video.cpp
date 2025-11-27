@@ -44,6 +44,11 @@ SDL_Surface *surface = nullptr; // 8-bit paletted surface for game rendering
 SDL_Surface *screen = nullptr;  // 32-bit RGB surface for final display
 SDL_Texture *texture = nullptr; // GPU texture for hardware-accelerated rendering
 image *main_screen = nullptr;   // Game's primary drawing surface
+// Light overlay (ARGB8888) composited over the frame
+static SDL_Surface *light_surface = nullptr;
+static SDL_Texture *light_texture = nullptr;
+static SDL_Rect light_overlay_bounds;
+static bool light_overlay_bounds_valid = false;
 
 // Factors for converting window coordinates to game coordinates
 int mouse_xpad = 0;   // Horizontal padding for letterboxing
@@ -57,6 +62,7 @@ int yres = 0;
 
 extern palette *lastl;
 extern Settings settings;
+static inline bool lights_enabled() { return settings.lights_overlay_enabled; }
 
 bool has_notch()
 {
@@ -242,7 +248,20 @@ void set_mode(int argc, char **argv)
         if (!texture)
         {
             throw std::runtime_error(SDL_GetError());
-        }        
+        }
+
+        if (lights_enabled())
+        {
+            light_surface = SDL_CreateRGBSurface(0, xres, yres, 32, 0, 0, 0, 0);
+            if (!light_surface)
+                throw std::runtime_error(SDL_GetError());
+            light_texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,
+                                             SDL_TEXTUREACCESS_STREAMING,
+                                             xres, yres);
+            if (!light_texture)
+                throw std::runtime_error(SDL_GetError());
+            LightOverlay_Clear(0);
+        }
 
         handle_window_resize();
         SDL_ShowCursor(0);
@@ -302,11 +321,21 @@ void close_graphics()
         SDL_DestroyTexture(texture);
         texture = nullptr;
     }
+    if (light_texture)
+    {
+        SDL_DestroyTexture(light_texture);
+        light_texture = nullptr;
+    }
 
     if (main_screen)
     {
         delete main_screen;
         main_screen = nullptr;
+    }
+    if (light_surface)
+    {
+        SDL_FreeSurface(light_surface);
+        light_surface = nullptr;
     }
 
     if (renderer)
@@ -422,5 +451,126 @@ void update_window_done()
     SDL_UpdateTexture(texture, nullptr, screen->pixels, screen->pitch);
     SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, texture, nullptr, nullptr);
+    if (lights_enabled() && light_surface && light_texture)
+    {
+        SDL_UpdateTexture(light_texture, nullptr, light_surface->pixels, light_surface->pitch);
+
+        SDL_Rect clip = {0, 0, 0, 0};
+        if (light_overlay_bounds_valid)
+        {
+            clip = light_overlay_bounds;
+            SDL_RenderSetClipRect(renderer, &clip);
+        }
+
+        // Single 30% blend to keep contribution subtle and preserve tile color
+        SDL_SetTextureAlphaMod(light_texture, 77); // ~30% opacity
+        SDL_SetTextureBlendMode(light_texture, SDL_BLENDMODE_BLEND);
+        SDL_RenderCopy(renderer, light_texture, nullptr, nullptr);
+
+        if (light_overlay_bounds_valid)
+        {
+            SDL_RenderSetClipRect(renderer, nullptr);
+        }
+
+        SDL_SetTextureAlphaMod(light_texture, 255);
+        SDL_SetTextureBlendMode(light_texture, SDL_BLENDMODE_ADD);
+
+        // Clear for next frame
+        LightOverlay_Clear(0);
+    }
     SDL_RenderPresent(renderer);
+}
+
+// Light overlay helpers
+bool LightOverlay_Enabled()
+{
+    return lights_enabled();
+}
+
+void LightOverlay_Clear(uint8_t alpha)
+{
+    light_overlay_bounds_valid = false;
+    if (!lights_enabled() || !light_surface)
+        return;
+    SDL_FillRect(light_surface, nullptr, SDL_MapRGBA(light_surface->format, 0, 0, 0, alpha));
+}
+
+void LightOverlay_AddViewRect(int x, int y, int width, int height)
+{
+    if (!lights_enabled() || width <= 0 || height <= 0)
+        return;
+
+    SDL_Rect rect = { x, y, width, height };
+    if (!light_overlay_bounds_valid)
+    {
+        light_overlay_bounds = rect;
+        light_overlay_bounds_valid = true;
+    }
+    else
+    {
+        int left = (light_overlay_bounds.x < rect.x) ? light_overlay_bounds.x : rect.x;
+        int top = (light_overlay_bounds.y < rect.y) ? light_overlay_bounds.y : rect.y;
+        int right = ((light_overlay_bounds.x + light_overlay_bounds.w) > (rect.x + rect.w)) ?
+                     (light_overlay_bounds.x + light_overlay_bounds.w) : (rect.x + rect.w);
+        int bottom = ((light_overlay_bounds.y + light_overlay_bounds.h) > (rect.y + rect.h)) ?
+                      (light_overlay_bounds.y + light_overlay_bounds.h) : (rect.y + rect.h);
+        light_overlay_bounds.x = left;
+        light_overlay_bounds.y = top;
+        light_overlay_bounds.w = right - left;
+        light_overlay_bounds.h = bottom - top;
+    }
+}
+
+void LightOverlay_AddRadialScreen(int cx, int cy, int radius, uint8_t alpha,
+                                  uint8_t red, uint8_t green, uint8_t blue)
+{
+    if (!lights_enabled() || !light_surface || radius <= 0)
+        return;
+
+    int w = light_surface->w, h = light_surface->h;
+    if (cx + radius < 0 || cy + radius < 0 || cx - radius >= w || cy - radius >= h)
+        return;
+
+    SDL_LockSurface(light_surface);
+    uint8_t *pixels = (uint8_t*)light_surface->pixels;
+    int pitch = light_surface->pitch; // bytes per row
+
+    for (int y = -radius; y <= radius; ++y)
+    {
+        int py = cy + y;
+        if (py < 0 || py >= h) continue;
+        int row = py * pitch;
+        for (int x = -radius; x <= radius; ++x)
+        {
+            int px = cx + x;
+            if (px < 0 || px >= w) continue;
+            int rr = x*x + y*y;
+            if (rr > radius*radius) continue;
+            float t = 1.0f - (float)rr / (float)(radius*radius);
+            uint8_t a = (uint8_t)(alpha * t);
+            uint32_t *dst = (uint32_t*)(pixels + row + px * 4);
+            uint32_t existing = *dst;
+            uint8_t ea = (existing >> 24) & 0xFF;
+            uint8_t er = (existing >> 16) & 0xFF;
+            uint8_t eg = (existing >> 8) & 0xFF;
+            uint8_t eb = existing & 0xFF;
+            uint8_t add_r = (uint8_t)((red * a) / 255);
+            uint8_t add_g = (uint8_t)((green * a) / 255);
+            uint8_t add_b = (uint8_t)((blue * a) / 255);
+            int na_i = ea + a;
+            int nr_i = er + add_r;
+            int ng_i = eg + add_g;
+            int nb_i = eb + add_b;
+            if (na_i > 255) na_i = 255;
+            if (nr_i > 255) nr_i = 255;
+            if (ng_i > 255) ng_i = 255;
+            if (nb_i > 255) nb_i = 255;
+            uint8_t na = (uint8_t)na_i;
+            uint8_t nr = (uint8_t)nr_i;
+            uint8_t ng = (uint8_t)ng_i;
+            uint8_t nb = (uint8_t)nb_i;
+            *dst = (na << 24) | (nr << 16) | (ng << 8) | nb;
+        }
+    }
+    SDL_UnlockSurface(light_surface);
 }

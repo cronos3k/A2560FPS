@@ -34,19 +34,21 @@
 #include <unistd.h>
 #endif
 
-typedef int socket_t;
-
-// Platform-specific definitions
+// Platform-specific socket type and definitions
 #ifdef WIN32
+typedef SOCKET socket_t;
 #define SOCK_CLOSE closesocket
 #define SOCK_IOCTL ioctlsocket
 #define INVALID_SOCKET_VALUE INVALID_SOCKET
-#define SOCKET_ERROR WSAGetLastError()
+#define SOCKET_ERROR_CODE WSAGetLastError()
+#define SOCKET_ERRNO WSAGetLastError()
 #else
+typedef int socket_t;
 #define SOCK_CLOSE close
 #define SOCK_IOCTL ioctl
 #define INVALID_SOCKET_VALUE -1
-#define SOCKET_ERROR errno
+#define SOCKET_ERROR_CODE errno
+#define SOCKET_ERRNO errno
 #endif
 
 // Global instances
@@ -106,6 +108,23 @@ static void net_log(const char *st, const void *buf, const long size)
 
   fprintf(log_file, "\n");
   fflush(log_file);
+#endif
+}
+
+// Log socket errors with platform-specific error messages
+static void log_socket_error(const char *operation)
+{
+#ifdef WIN32
+  int error = WSAGetLastError();
+  char *message = nullptr;
+  FormatMessageA(
+    FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+    nullptr, error, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+    (LPSTR)&message, 0, nullptr);
+  DEBUG_LOG("%s failed with error %d: %s", operation, error, message ? message : "Unknown error");
+  if (message) LocalFree(message);
+#else
+  DEBUG_LOG("%s failed with error %d: %s", operation, errno, strerror(errno));
 #endif
 }
 
@@ -240,12 +259,14 @@ int tcp_socket::listen(int port)
 
   if (bind(fd, (sockaddr *)&host, sizeof(host)) == -1)
   {
+    log_socket_error("bind()");
     DEBUG_LOG("Could not bind socket to port %d\n", port);
     return 0;
   }
 
   if (::listen(fd, SOMAXCONN) == -1)
   {
+    log_socket_error("listen()");
     DEBUG_LOG("Could not listen to socket on port %d\n", port);
     return 0;
   }
@@ -310,7 +331,8 @@ int udp_socket::listen(int port)
 
   if (bind(fd, (sockaddr *)&host, sizeof(host)) == -1)
   {
-    DEBUG_LOG("Could not bind socket to port %d\n", port);
+    log_socket_error("bind()");
+    DEBUG_LOG("Could not bind UDP socket to port %d\n", port);
     return 0;
   }
   return 1;
@@ -347,6 +369,7 @@ net_address *tcpip_protocol::get_local_address()
           {
             auto *addr = new ip_address;
             addr->addr = *ipv4;
+            printf("Local IP Address: %s\n", inet_ntoa(addr->addr.sin_addr));
             freeaddrinfo(result);
             return addr;
           }
@@ -354,6 +377,14 @@ net_address *tcpip_protocol::get_local_address()
       }
       freeaddrinfo(result);
     }
+    else
+    {
+      log_socket_error("getaddrinfo()");
+    }
+  }
+  else
+  {
+    log_socket_error("gethostname()");
   }
 #else
   struct ifaddrs *ifaddr, *ifa;
@@ -500,6 +531,7 @@ net_socket *tcpip_protocol::connect_to_server(net_address *addr, const net_socke
                               0);
   if (socket_fd == INVALID_SOCKET_VALUE)
   {
+    log_socket_error("socket()");
     DEBUG_LOG("Unable to create socket (too many open files?)\n");
     return nullptr;
   }
@@ -507,7 +539,8 @@ net_socket *tcpip_protocol::connect_to_server(net_address *addr, const net_socke
   if (connect(socket_fd, (sockaddr *)&((ip_address *)addr)->addr,
               sizeof(((ip_address *)addr)->addr)) == -1)
   {
-    DEBUG_LOG("Unable to connect\n");
+    log_socket_error("connect()");
+    DEBUG_LOG("Unable to connect to server\n");
 
     SOCK_CLOSE(socket_fd);
 
@@ -524,6 +557,7 @@ net_socket *tcpip_protocol::create_listen_socket(const int port, const net_socke
                                     0);
   if (socket_fd == INVALID_SOCKET_VALUE)
   {
+    log_socket_error("socket()");
     DEBUG_LOG("Unable to create socket (too many open files?)\n");
     return nullptr;
   }
@@ -725,51 +759,51 @@ net_address *tcpip_protocol::find_address(const int port, char *name)
     {
       responder->read_selectable();
       responder->write_unselectable();
-      bcast = static_cast<ip_address *>(get_local_address());
-      if (bcast)
-      {
-        bcast->set_port(port);
-        *((unsigned char *)&bcast->addr.sin_addr + 3) = 0;
-      }
+      responder->broadcastable(); // Enable broadcast on this socket
+
+      // Use proper broadcast address (255.255.255.255)
+      bcast = new ip_address();
+      bcast->addr.sin_family = AF_INET;
+      bcast->addr.sin_addr.s_addr = htonl(INADDR_BROADCAST); // 255.255.255.255
+      bcast->set_port(port);
+
+      DEBUG_LOG("LAN discovery using broadcast address 255.255.255.255:%d\n", port);
     }
   }
 
   if (responder && bcast)
   {
-    for (int i = 0; i < 5; i++)
+    // Send broadcast discovery packets (try multiple times for reliability)
+    for (int attempt = 0; attempt < 3; attempt++)
     {
-      bool found = false;
+      DEBUG_LOG("Sending LAN discovery broadcast (attempt %d/3)\n", attempt + 1);
+      responder->write(notify_signature, strlen(notify_signature), bcast);
 
-      // Check existing addresses
-      for (p_request p = servers.begin(); !found && p != servers.end(); ++p)
+      // Give servers time to respond
+      for (int wait = 0; wait < 5; wait++)
       {
-        if ((*p)->addr->equal(bcast))
+        select(); // Process incoming responses
+
+        // If we found servers, we're done
+        if (!servers.empty())
         {
-          found = true;
+          DEBUG_LOG("Found %zu server(s) on LAN\n", servers.size());
+          goto discovery_complete;
         }
-      }
 
-      for (p_request q = returned.begin(); !found && q != returned.end(); ++q)
-      {
-        if ((*q)->addr->equal(bcast))
-        {
-          found = true;
-        }
+        // Small delay between polls
+#ifdef WIN32
+        Sleep(100);
+#else
+        usleep(100000); // 100ms
+#endif
       }
+    }
 
-      if (!found)
-      {
-        responder->write(notify_signature, strlen(notify_signature), bcast);
-        select();
-      }
-
-      *((unsigned char *)&bcast->addr.sin_addr + 3) += 1;
-      select();
-
-      if (!servers.empty())
-      {
-        break;
-      }
+    discovery_complete:
+    if (servers.empty())
+    {
+      DEBUG_LOG("No servers found on LAN\n");
     }
   }
 

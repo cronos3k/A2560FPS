@@ -1,0 +1,17 @@
+# Abuse 2025 Modern Launcher
+cmake_minimum_required(VERSION 3.10)
+
+project(abuse25_launcher)
+
+# Create the launcher executable
+add_executable(abuse25 WIN32 abuse25_launcher.cpp)
+
+# Set subsystem to Windows (GUI app, no console)
+if(MSVC)
+    set_target_properties(abuse25 PROPERTIES
+        LINK_FLAGS "/SUBSYSTEM:WINDOWS"
+    )
+endif()
+
+# Install to the same directory as the main executable
+install(TARGETS abuse25 DESTINATION .)
