@@ -95,6 +95,10 @@ LObject *Lisp::CollectObject(LObject *x)
         case L_NUMBER:
             ret = LNumber::Create(((LNumber *)x)->m_num);
             break;
+        case L_SYMBOL:
+            // Symbols are managed globally in symbol table, just return as-is
+            ret = x;
+            break;
         case L_SYS_FUNCTION:
             ret = new_lisp_sys_function(((LSysFunction *)x)->min_args,
                                         ((LSysFunction *)x)->max_args,
