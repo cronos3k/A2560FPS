@@ -70,7 +70,7 @@ Full build instructions: [Development](#development)
 - **Wall Jump System**: Advanced movement mechanics implementation
 - **AI Sprite Interpolation**: Neural network-based frame interpolation
 - **Modern Configuration**: Enhanced diagnostics and QoL improvements
-- 🤖 *Developed with assistance from Claude (Anthropic)*
+- 🤖 *Developed with assistance from Claude (Anthropic)* (For AI-Enhanced 60 FPS Sprite Interpolation system)
 
 ### Upstream: Abuse 2025
 - **Andrej Pancik** (2024-2025): Modern port with multiplayer, gamepad support, high-res graphics
