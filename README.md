@@ -26,29 +26,63 @@ wall_debug_overlay=0             # Show debug overlay (Alt+N toggles)
 **Implementation**: Non-destructive integration at `src/objects.cpp:1517` using original physics
 
 ### 🎨 AI-Enhanced 60 FPS Sprite Interpolation
-Experience buttery-smooth animations powered by neural networks:
+Experience buttery-smooth animations powered by neural networks while preserving authentic gameplay:
 
-- **4x Frame Rate**: Original 15 FPS physics with 60 FPS visual smoothness
-- **RIFE Neural Networks**: Real-Time Intermediate Flow Estimation for frame generation
-- **Intelligent Frame Mapping**: Seamless integration with original sprite system
-- **Optional Toggle**: Can be disabled to preserve classic look
-- **Current Collections**: aliens, bigexp (explosions), droid, fire
+- **Dual Frame Rate Architecture**:
+  - **Physics Engine**: 15 FPS (original timing preserved for authentic gameplay feel)
+  - **Visual Rendering**: 60 FPS (AI-interpolated frames for smooth animations)
+  - This separation maintains the classic Abuse "feel" while providing modern visual fluidity
+
+- **RIFE Neural Networks**: Real-Time Intermediate Flow Estimation generates intermediate animation frames
+- **Intelligent Frame Mapping**: Automatically maps original frames to 4x interpolated sequences
+- **Non-Destructive Design**: Runs in parallel with original sprite system, automatic fallback if data unavailable
+- **Optional Feature**: Toggle on/off via config without affecting gameplay
+- **Current Collections**: aliens, bigexp (large explosions), droid enemies, fire effects
 
 ```ini
 # Enable in config.txt
-interpolated_sprites_enabled=1   # AI-enhanced 60 FPS sprites
+interpolated_sprites_enabled=1   # AI-enhanced 60 FPS sprites (optional)
 ```
 
-**Technical**: Uses `InterpSpriteManager` with automatic fallback to original sprites if data unavailable
+**Technical Details**:
+- Manager: `InterpSpriteManager` class (src/interpolation/interp_sprite.cpp)
+- Data Location: `AIWork/frame-interpolation/final/`
+- Rendering: Integrated into main render loop with zero overhead when disabled
+- Fallback: Automatically uses original sprites if interpolated data unavailable
 
 ### ✨ Modern Enhancements
 
-- **Dedicated Jump Key**: `Space` for jumping (in addition to `W`)
-- **60 FPS Frame Pacing**: Configurable frame rate limiting (`fps_limit=60`)
-- **Enhanced Visual Effects**: Dynamic light/glow overlay system
-- **Config Diagnostics**: Debug output for troubleshooting settings
-- **Modern Defaults**: WASD + Space control layout
-- **Auto-Config Launcher**: `abuse25.exe` creates optimized settings
+- **Dedicated Jump Key**: `Space` for jumping (in addition to `W`) - no more accidental jumps!
+- **60 FPS Frame Pacing**:
+  - Smooth frame rate limiting system (`fps_limit=60` or custom)
+  - Independent from physics tick rate (15 FPS physics, 60 FPS rendering)
+  - Prevents screen tearing while maintaining gameplay authenticity
+- **Enhanced Visual Effects**:
+  - Dynamic light/glow overlay for particles and explosions
+  - Toggle via `lights_overlay_enabled=1` in config
+  - Adds atmospheric depth without affecting performance
+- **Config Diagnostics**: Enhanced debug output for troubleshooting settings loading
+- **Modern Defaults**: WASD + Space control layout out-of-the-box
+- **Auto-Config Launcher**: `abuse25.exe` creates optimized `config_2025.txt` automatically
+
+### 🔧 Technical Summary
+
+**Frame Rate Architecture**:
+- Physics simulation: 15 FPS (preserved for authentic gameplay timing)
+- Visual rendering: 60 FPS (smooth display with AI-interpolated sprites)
+- Frame pacing: Configurable limit (default 60 FPS, 0=uncapped)
+- This dual-rate system maintains the classic "feel" while providing modern visual fluidity
+
+**Key Implementation Details**:
+- Wall jump system: `src/objects.cpp:1517` (non-destructive integration)
+- Sprite interpolation: `InterpSpriteManager` class with intelligent frame mapping
+- Configuration: Enhanced `Settings` class with comprehensive diagnostics
+- All features toggle-able via `config.txt` or `config_2025.txt`
+
+**Compatibility**:
+- Fully compatible with original Abuse gameplay mechanics
+- Non-destructive design: all enhancements can be disabled
+- Maintains GPL 2+ license compatibility with upstream
 
 ### 📦 Quick Start
 
