@@ -26,12 +26,12 @@ wall_debug_overlay=0             # Show debug overlay (Alt+N toggles)
 **Implementation**: Non-destructive integration at `src/objects.cpp:1517` using original physics
 
 ### 🎨 AI-Enhanced 60 FPS Sprite Interpolation
-Experience buttery-smooth animations powered by neural networks while preserving authentic gameplay:
+Experience buttery-smooth animations powered by neural networks:
 
-- **Dual Frame Rate Architecture**:
-  - **Physics Engine**: 15 FPS (original timing preserved for authentic gameplay feel)
-  - **Visual Rendering**: 60 FPS (AI-interpolated frames for smooth animations)
-  - This separation maintains the classic Abuse "feel" while providing modern visual fluidity
+- **Full 60 FPS Experience**:
+  - **Physics Engine**: 60 FPS (smooth, responsive gameplay)
+  - **Visual Rendering**: 60 FPS (fluid display)
+  - **Sprite Animations**: Original 15 FPS sprite art interpolated to 60 FPS using AI
 
 - **RIFE Neural Networks**: Real-Time Intermediate Flow Estimation generates intermediate animation frames
 - **Intelligent Frame Mapping**: Automatically maps original frames to 4x interpolated sequences
@@ -55,8 +55,8 @@ interpolated_sprites_enabled=1   # AI-enhanced 60 FPS sprites (optional)
 - **Dedicated Jump Key**: `Space` for jumping (in addition to `W`) - no more accidental jumps!
 - **60 FPS Frame Pacing**:
   - Smooth frame rate limiting system (`fps_limit=60` or custom)
-  - Independent from physics tick rate (15 FPS physics, 60 FPS rendering)
-  - Prevents screen tearing while maintaining gameplay authenticity
+  - Both physics and rendering run at 60 FPS (configurable via `physics_update`)
+  - Prevents screen tearing with buttery-smooth gameplay
 - **Enhanced Visual Effects**:
   - Dynamic light/glow overlay for particles and explosions
   - Toggle via `lights_overlay_enabled=1` in config
@@ -68,10 +68,10 @@ interpolated_sprites_enabled=1   # AI-enhanced 60 FPS sprites (optional)
 ### 🔧 Technical Summary
 
 **Frame Rate Architecture**:
-- Physics simulation: 15 FPS (preserved for authentic gameplay timing)
-- Visual rendering: 60 FPS (smooth display with AI-interpolated sprites)
-- Frame pacing: Configurable limit (default 60 FPS, 0=uncapped)
-- This dual-rate system maintains the classic "feel" while providing modern visual fluidity
+- Physics simulation: 60 FPS (16.67ms timestep, configurable via `physics_update`)
+- Visual rendering: 60 FPS (smooth display)
+- Sprite animations: Original 15 FPS sprite art → AI-interpolated to 60 FPS
+- Frame pacing: Configurable limit (default 60 FPS, 0=uncapped via `fps_limit`)
 
 **Key Implementation Details**:
 - Wall jump system: `src/objects.cpp:1517` (non-destructive integration)
