@@ -1417,51 +1417,31 @@ int game_object::mover(int cx, int cy, int button)  // return false if the route
     else if (xvel()<0) set_xvel(-get_ability(type(),jump_top_speed));
   } */
 
-  // ====== WALL JUMP DETECTION (before normal jump) ======
+  // ====== WALL JUMP DETECTION (using original collision system) ======
   int wall_nearby_left = 0;
   int wall_nearby_right = 0;
 
-  if (settings.wall_jump_enabled && !floating())
+  if (settings.wall_jump_enabled && !floating() && gravity())  // Only when in air (falling)
   {
-    // Get player sprite bounds
-    int32_t sprite_x1, sprite_y1, sprite_x2, sprite_y2;
-    picture_space(sprite_x1, sprite_y1, sprite_x2, sprite_y2);
-
-    // Linear trace along sprite height, check within 3 pixels
-    int trace_samples = (sprite_y2 - sprite_y1) / 2; // Sample every 2 pixels
-    if (trace_samples < 1) trace_samples = 1;
-
-    for (int i = 0; i <= trace_samples; i++)
+    // Use original try_move() collision detection to check for walls
+    // Test a small movement left to see if blocked
+    int32_t test_left_xv = -3;  // Try to move 3 pixels left
+    int32_t test_left_yv = 0;
+    try_move(x, y, test_left_xv, test_left_yv, 3);
+    if (test_left_xv == 0)  // Movement was completely blocked = wall on left
     {
-      int check_y = sprite_y1 + (sprite_y2 - sprite_y1) * i / trace_samples;
+      wall_nearby_left = 1;
+      printf("[WALL JUMP] Wall detected on LEFT\n");
+    }
 
-      // Check 3 pixels to the left
-      for (int px = 1; px <= 3; px++)
-      {
-        int check_x = sprite_x1 - px;
-        int tw = the_game->ftile_width();
-        int th = the_game->ftile_height();
-        uint16_t tile = current_level->GetFg(ivec2(check_x / tw, check_y / th));
-        if (tile != 0)
-        {
-          wall_nearby_left = 1;
-          break;
-        }
-      }
-
-      // Check 3 pixels to the right
-      for (int px = 1; px <= 3; px++)
-      {
-        int check_x = sprite_x2 + px;
-        int tw = the_game->ftile_width();
-        int th = the_game->ftile_height();
-        uint16_t tile = current_level->GetFg(ivec2(check_x / tw, check_y / th));
-        if (tile != 0)
-        {
-          wall_nearby_right = 1;
-          break;
-        }
-      }
+    // Test a small movement right to see if blocked
+    int32_t test_right_xv = 3;  // Try to move 3 pixels right
+    int32_t test_right_yv = 0;
+    try_move(x, y, test_right_xv, test_right_yv, 3);
+    if (test_right_xv == 0)  // Movement was completely blocked = wall on right
+    {
+      wall_nearby_right = 1;
+      printf("[WALL JUMP] Wall detected on RIGHT\n");
     }
   }
 
@@ -1476,6 +1456,8 @@ int game_object::mover(int cx, int cy, int button)  // return false if the route
     // Wall jump logic: W+Spacebar near wall
     if (settings.wall_jump_enabled && cy < 0 && (wall_nearby_left || wall_nearby_right))
     {
+      printf("[WALL JUMP] TRIGGERED! W+Spacebar near wall (cx=%d, cy=%d)\n", cx, cy);
+
       // Determine if pushing toward wall
       int pushing_toward_left_wall = (cx < 0 && wall_nearby_left);
       int pushing_toward_right_wall = (cx > 0 && wall_nearby_right);
@@ -1485,17 +1467,20 @@ int game_object::mover(int cx, int cy, int button)  // return false if the route
         // Horizontal wall kick: jump away from left wall
         wall_kick_direction = 1; // Jump right
         jump_width_multiplier = 2;
+        printf("[WALL JUMP] Horizontal kick RIGHT (away from left wall) - 2x width\n");
       }
       else if (pushing_toward_right_wall)
       {
         // Horizontal wall kick: jump away from right wall
         wall_kick_direction = -1; // Jump left
         jump_width_multiplier = 2;
+        printf("[WALL JUMP] Horizontal kick LEFT (away from right wall) - 2x width\n");
       }
       else
       {
         // Vertical wall climb: jump 2x higher
         jump_height_multiplier = 2;
+        printf("[WALL JUMP] Vertical climb - 2x height\n");
       }
     }
 
