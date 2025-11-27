@@ -34,6 +34,11 @@
 
 extern Settings settings;
 
+// DEBUG: Global variables for wall jump input visualization
+int last_walljump_input_frame = 0;
+int walljump_input_x = 0;
+int walljump_input_y = 0;
+
 char **object_names;
 int total_objects;
 game_object *current_object;
@@ -827,6 +832,31 @@ void game_object::drawer()
                      y-cpict->Size().y+1-current_vyadd));
     }
   }
+
+  // DEBUG: Draw green lines when W+Spacebar is pressed (wall jump input)
+  // This is temporary debug visualization
+  extern int last_walljump_input_frame;
+  extern int walljump_input_x;
+  extern int walljump_input_y;
+
+  // Draw debug lines if W+Spacebar was pressed
+  if (last_walljump_input_frame > 0)
+  {
+    // Draw green cross at player position
+    int screen_x = walljump_input_x - current_vxadd;
+    int screen_y = walljump_input_y - current_vyadd;
+    uint8_t green = 10;  // Green color index
+
+    // Draw horizontal line
+    for (int i = -20; i <= 20; i++)
+      main_screen->PutPixel(ivec2(screen_x + i, screen_y), green);
+
+    // Draw vertical line
+    for (int i = -20; i <= 20; i++)
+      main_screen->PutPixel(ivec2(screen_x, screen_y + i), green);
+
+    last_walljump_input_frame = 0;  // Reset after drawing
+  }
 }
 
 game_object *game_object::try_move(int32_t x, int32_t y, int32_t &xv, int32_t &yv, int checks)
@@ -1443,6 +1473,19 @@ int game_object::mover(int cx, int cy, int button)  // return false if the route
       wall_nearby_right = 1;
       printf("[WALL JUMP] Wall detected on RIGHT\n");
     }
+  }
+
+  // DEBUG: Set visual debug when W+Spacebar is pressed
+  extern int last_walljump_input_frame;
+  extern int walljump_input_x;
+  extern int walljump_input_y;
+
+  if ((button & 8) && cy < 0)  // Spacebar AND W key
+  {
+    last_walljump_input_frame = 1;
+    walljump_input_x = x;
+    walljump_input_y = y;
+    printf("[DEBUG] W+SPACEBAR detected! (cx=%d, cy=%d, button=%d)\n", cx, cy, button);
   }
 
   // see if the user said to jump (SPACEBAR, modified by W+wall proximity)
