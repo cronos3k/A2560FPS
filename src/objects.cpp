@@ -1451,27 +1451,45 @@ int game_object::mover(int cx, int cy, int button)  // return false if the route
   int wall_nearby_left = 0;
   int wall_nearby_right = 0;
 
-  if (settings.wall_jump_enabled && !floating() && gravity())  // Only when in air (falling)
+  if (settings.wall_jump_enabled && !floating())
   {
-    // Use original try_move() collision detection to check for walls
-    // Test a small movement left to see if blocked
-    int32_t test_left_xv = -3;  // Try to move 3 pixels left
-    int32_t test_left_yv = 0;
-    try_move(x, y, test_left_xv, test_left_yv, 3);
-    if (test_left_xv == 0)  // Movement was completely blocked = wall on left
-    {
-      wall_nearby_left = 1;
-      printf("[WALL JUMP] Wall detected on LEFT\n");
-    }
+    // DEBUG: Show player state and sprite bounds
+    int32_t sprite_x1, sprite_y1, sprite_x2, sprite_y2;
+    picture_space(sprite_x1, sprite_y1, sprite_x2, sprite_y2);
 
-    // Test a small movement right to see if blocked
-    int32_t test_right_xv = 3;  // Try to move 3 pixels right
-    int32_t test_right_yv = 0;
-    try_move(x, y, test_right_xv, test_right_yv, 3);
-    if (test_right_xv == 0)  // Movement was completely blocked = wall on right
+    printf("[WALL DEBUG] Player at (%d,%d), gravity=%d, sprite bounds: x1=%d y1=%d x2=%d y2=%d, width=%d\n",
+           x, y, gravity(), sprite_x1, sprite_y1, sprite_x2, sprite_y2, sprite_x2 - sprite_x1);
+
+    if (gravity())  // Only when in air (falling)
     {
-      wall_nearby_right = 1;
-      printf("[WALL JUMP] Wall detected on RIGHT\n");
+      // Use original try_move() collision detection to check for walls
+      // Test a small movement left to see if blocked
+      int32_t test_left_xv = -3;  // Try to move 3 pixels left
+      int32_t test_left_yv = 0;
+      try_move(x, y, test_left_xv, test_left_yv, 3);
+      printf("[WALL DEBUG] Left test: wanted -3, got %d (blocked=%s)\n",
+             test_left_xv, test_left_xv == 0 ? "YES" : "NO");
+      if (test_left_xv == 0)  // Movement was completely blocked = wall on left
+      {
+        wall_nearby_left = 1;
+        printf("[WALL JUMP] Wall detected on LEFT\n");
+      }
+
+      // Test a small movement right to see if blocked
+      int32_t test_right_xv = 3;  // Try to move 3 pixels right
+      int32_t test_right_yv = 0;
+      try_move(x, y, test_right_xv, test_right_yv, 3);
+      printf("[WALL DEBUG] Right test: wanted 3, got %d (blocked=%s)\n",
+             test_right_xv, test_right_xv == 0 ? "YES" : "NO");
+      if (test_right_xv == 0)  // Movement was completely blocked = wall on right
+      {
+        wall_nearby_right = 1;
+        printf("[WALL JUMP] Wall detected on RIGHT\n");
+      }
+    }
+    else
+    {
+      printf("[WALL DEBUG] Not checking walls - player on ground (gravity=0)\n");
     }
   }
 
