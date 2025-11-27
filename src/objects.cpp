@@ -1417,15 +1417,101 @@ int game_object::mover(int cx, int cy, int button)  // return false if the route
     else if (xvel()<0) set_xvel(-get_ability(type(),jump_top_speed));
   } */
 
-  // see if the user said to jump (SPACEBAR ONLY - W key is for wall jump)
+  // ====== WALL JUMP DETECTION (before normal jump) ======
+  int wall_nearby_left = 0;
+  int wall_nearby_right = 0;
+
+  if (settings.wall_jump_enabled && !floating())
+  {
+    // Get player sprite bounds
+    int32_t sprite_x1, sprite_y1, sprite_x2, sprite_y2;
+    picture_space(sprite_x1, sprite_y1, sprite_x2, sprite_y2);
+
+    // Linear trace along sprite height, check within 3 pixels
+    int trace_samples = (sprite_y2 - sprite_y1) / 2; // Sample every 2 pixels
+    if (trace_samples < 1) trace_samples = 1;
+
+    for (int i = 0; i <= trace_samples; i++)
+    {
+      int check_y = sprite_y1 + (sprite_y2 - sprite_y1) * i / trace_samples;
+
+      // Check 3 pixels to the left
+      for (int px = 1; px <= 3; px++)
+      {
+        int check_x = sprite_x1 - px;
+        int tw = the_game->ftile_width();
+        int th = the_game->ftile_height();
+        uint16_t tile = current_level->GetFg(ivec2(check_x / tw, check_y / th));
+        if (tile != 0)
+        {
+          wall_nearby_left = 1;
+          break;
+        }
+      }
+
+      // Check 3 pixels to the right
+      for (int px = 1; px <= 3; px++)
+      {
+        int check_x = sprite_x2 + px;
+        int tw = the_game->ftile_width();
+        int th = the_game->ftile_height();
+        uint16_t tile = current_level->GetFg(ivec2(check_x / tw, check_y / th));
+        if (tile != 0)
+        {
+          wall_nearby_right = 1;
+          break;
+        }
+      }
+    }
+  }
+
+  // see if the user said to jump (SPACEBAR, modified by W+wall proximity)
   if ((button & 8) && !floating() && !gravity())
   {
+    int jump_height_multiplier = 1;
+    int jump_width_multiplier = 1;
+    int wall_kick_direction = 0;
+
+    // Wall jump logic: W+Spacebar near wall
+    if (settings.wall_jump_enabled && cy < 0 && (wall_nearby_left || wall_nearby_right))
+    {
+      // Determine if pushing toward wall
+      int pushing_toward_left_wall = (cx < 0 && wall_nearby_left);
+      int pushing_toward_right_wall = (cx > 0 && wall_nearby_right);
+
+      if (pushing_toward_left_wall)
+      {
+        // Horizontal wall kick: jump away from left wall
+        wall_kick_direction = 1; // Jump right
+        jump_width_multiplier = 2;
+      }
+      else if (pushing_toward_right_wall)
+      {
+        // Horizontal wall kick: jump away from right wall
+        wall_kick_direction = -1; // Jump left
+        jump_width_multiplier = 2;
+      }
+      else
+      {
+        // Vertical wall climb: jump 2x higher
+        jump_height_multiplier = 2;
+      }
+    }
+
     set_gravity(1);
-    set_yvel(get_ability(type(),jump_yvel));
+    set_yvel(get_ability(type(),jump_yvel) * jump_height_multiplier);
 //    if (cx && has_sequence(run_jump))
       set_state(run_jump);
-    if (xvel()!=0)
+
+    if (wall_kick_direction != 0)
     {
+      // Wall kick: force direction away from wall
+      set_xvel(get_ability(type(),jump_top_speed) * jump_width_multiplier * wall_kick_direction);
+      direction = wall_kick_direction;
+    }
+    else if (xvel()!=0)
+    {
+      // Normal jump with optional height boost
       if (direction>0)
         set_xvel(get_ability(type(),jump_top_speed));
       else
@@ -1464,69 +1550,6 @@ int game_object::mover(int cx, int cy, int button)  // return false if the route
       }
     }    */
   }
-  // ====== WALL JUMP MECHANICS (Non-destructive, optional) ======
-  // Simple wall jump: Press W (up) near a wall to jump away from it
-  // W key is ONLY for wall jump, spacebar is for normal jump
-  if (settings.wall_jump_enabled && floating() == 0)
-  {
-    // Wall detection: check for solid foreground tiles adjacent to player
-    int tw = the_game->ftile_width();
-    int th = the_game->ftile_height();
-    int player_tile_x = x / tw;
-    int player_tile_y = y / th;
-
-    int wall_left = 0;
-    int wall_right = 0;
-
-    // Check tile to the left
-    if (player_tile_x > 0)
-    {
-      uint16_t tile_val = current_level->GetFg(ivec2(player_tile_x - 1, player_tile_y));
-      if (tile_val != 0) // Non-zero = solid tile
-        wall_left = 1;
-    }
-
-    // Check tile to the right
-    if (player_tile_x < (int)current_level->foreground_width() / tw - 1)
-    {
-      uint16_t tile_val = current_level->GetFg(ivec2(player_tile_x + 1, player_tile_y));
-      if (tile_val != 0)
-        wall_right = 1;
-    }
-
-    // Simple wall jump: Press W (up) when next to wall = instant wall jump
-    if (cy < 0 && (wall_left || wall_right))
-    {
-      // Determine which wall we're next to
-      int jump_direction = 0;
-      if (wall_left && !wall_right)
-        jump_direction = 1;  // Left wall, jump right
-      else if (wall_right && !wall_left)
-        jump_direction = -1; // Right wall, jump left
-      else if (wall_left && wall_right)
-        // Between two walls, use player's facing direction
-        jump_direction = direction;
-
-      // Execute wall jump
-      if (jump_direction != 0)
-      {
-        // Vertical velocity (same as normal jump)
-        set_yvel(get_ability(type(), jump_yvel));
-
-        // Horizontal velocity (push away from wall)
-        int wall_jump_xvel = get_ability(type(), jump_top_speed);
-        set_xvel(wall_jump_xvel * jump_direction);
-        direction = jump_direction;
-
-        set_gravity(1);
-        set_state(run_jump);
-      }
-    }
-  }
-  // ====== END WALL JUMP MECHANICS ======
-
-
-
 
   if (state==run_jump && yvel()>0)
     set_state(run_jump_fall);
