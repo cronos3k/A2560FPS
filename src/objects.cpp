@@ -1451,6 +1451,10 @@ int game_object::mover(int cx, int cy, int button)  // return false if the route
   int wall_nearby_left = 0;
   int wall_nearby_right = 0;
 
+  // DEBUG: Check if we're even reaching this code
+  printf("[WALL DEBUG] Tick - wall_jump_enabled=%d, floating=%d, gravity=%d\n",
+         settings.wall_jump_enabled, floating(), gravity());
+
   if (settings.wall_jump_enabled && !floating())
   {
     // DEBUG: Show player state and sprite bounds
