@@ -6,3 +6,14 @@
 *~
 
 build/
+# Windows build directory
+msvc-build/
+
+# Python virtual environments
+AIWork/venv/
+AIWork/__pycache__/
+*.pyc
+
+# Temporary files
+*.patch
+*.backup

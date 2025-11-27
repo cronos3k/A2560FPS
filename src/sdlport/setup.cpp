@@ -336,6 +336,7 @@ bool Settings::CreateConfigFile()
 
 bool Settings::ReadConfigFile()
 {
+	printf("[CONFIG DEBUG] ReadConfigFile() called - attempting to load: %s\n", config_filename);
 	FILE *filein = prefix_fopen(config_filename, "r");
 	if (!filein)
 	{
@@ -345,6 +346,7 @@ bool Settings::ReadConfigFile()
 		return CreateConfigFile();
 	}
 
+	printf("[CONFIG DEBUG] Successfully opened config file: %s\n", config_filename);
 	char line[512];
 	while (fgets(line, sizeof(line), filein))
 	{
@@ -401,7 +403,10 @@ bool Settings::ReadConfigFile()
         else if (attr == "fps_limit")
             this->fps_limit = AR_ToInt(value);
         else if (attr == "wall_jump_enabled")
+        {
+            printf("[CONFIG DEBUG] wall_jump_enabled: raw='%s' -> AR_ToBool=%d\n", value.c_str(), AR_ToBool(value));
             this->wall_jump_enabled = AR_ToBool(value);
+        }
         else if (attr == "wall_coyote_frames")
             this->wall_coyote_frames = AR_ToInt(value);
         else if (attr == "wall_hang_hold_frames")
