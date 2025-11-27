@@ -33,6 +33,7 @@ public:
 	int fps_limit; // 0 = uncapped, otherwise target FPS (eg. 30/60/120)
 
 	// gameplay tuning
+	bool wall_jump_enabled; // enable wall jump mechanics (default false - non-destructive)
 	int wall_coyote_frames; // wall-jump grace frames after releasing from wall (default 60)
 	int wall_hang_hold_frames; // frames to hold toward wall before latch (default 60)
 

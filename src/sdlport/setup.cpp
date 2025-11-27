@@ -106,6 +106,7 @@ Settings::Settings()
     // frame pacing
     this->fps_limit = 60; // default cap; 0 = uncapped
     // gameplay tuning
+    this->wall_jump_enabled = false; // disable wall jump by default (non-destructive)
     this->wall_coyote_frames = 60; // 1s at 60 Hz by default
     this->wall_hang_hold_frames = 12; // ~0.2s at 60 Hz (adjust in config)
     this->wall_debug_overlay = false; // start with overlay hidden
@@ -216,6 +217,8 @@ bool Settings::CreateConfigFile()
     fprintf(out, "fps_limit=%d\n\n", this->fps_limit);
 
     fprintf(out, "; GAMEPLAY\n");
+    fprintf(out, "; Enable wall jump mechanics (optional gameplay feature)\n");
+    fprintf(out, "wall_jump_enabled=%d\n", this->wall_jump_enabled ? 1 : 0);
     fprintf(out, "; Wall jump grace window after letting go of the wall (frames)\n");
     fprintf(out, "wall_coyote_frames=%d\n", this->wall_coyote_frames);
     fprintf(out, "; Hold toward-wall time before latching (frames)\n");
@@ -397,6 +400,8 @@ bool Settings::ReadConfigFile()
             this->hires = AR_ToInt(value);
         else if (attr == "fps_limit")
             this->fps_limit = AR_ToInt(value);
+        else if (attr == "wall_jump_enabled")
+            this->wall_jump_enabled = AR_ToBool(value);
         else if (attr == "wall_coyote_frames")
             this->wall_coyote_frames = AR_ToInt(value);
         else if (attr == "wall_hang_hold_frames")
