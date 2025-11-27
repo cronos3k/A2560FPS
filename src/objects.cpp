@@ -1465,7 +1465,7 @@ int game_object::mover(int cx, int cy, int button)  // return false if the route
     }    */
   }
   // ====== WALL JUMP MECHANICS (Non-destructive, optional) ======
-  // Only active when settings.wall_jump_enabled is true
+  // Simple wall jump: Press W near a wall to jump away from it
   if (settings.wall_jump_enabled && gravity() && floating() == 0)
   {
     // Wall detection: check for solid foreground tiles adjacent to player
@@ -1481,7 +1481,7 @@ int game_object::mover(int cx, int cy, int button)  // return false if the route
     if (player_tile_x > 0)
     {
       uint16_t tile_val = current_level->GetFg(ivec2(player_tile_x - 1, player_tile_y));
-      if (tile_val != 0) // Non-NULL = solid tile
+      if (tile_val != 0) // Non-zero = solid tile
         wall_left = 1;
     }
 
@@ -1493,101 +1493,35 @@ int game_object::mover(int cx, int cy, int button)  // return false if the route
         wall_right = 1;
     }
 
-    // Track wall holding: player must hold toward wall while falling
-    if (yvel() > 0) // Falling
+    // Simple wall jump: Press W (up) when next to wall = instant wall jump
+    if (cy < 0 && (wall_left || wall_right))
     {
-      if ((cx < 0 && wall_left) || (cx > 0 && wall_right))
+      // Determine which wall we're next to
+      int jump_direction = 0;
+      if (wall_left && !wall_right)
+        jump_direction = 1;  // Left wall, jump right
+      else if (wall_right && !wall_left)
+        jump_direction = -1; // Right wall, jump left
+      else if (wall_left && wall_right)
+        // Between two walls, use player's facing direction
+        jump_direction = direction;
+
+      // Execute wall jump
+      if (jump_direction != 0)
       {
-        // Holding toward wall
-        wall_hold++;
+        // Vertical velocity (same as normal jump)
+        set_yvel(get_ability(type(), jump_yvel));
 
-        // Latch onto wall when hold threshold is reached
-        if (wall_hold >= settings.wall_hang_hold_frames && !wall_hanging())
-        {
-          set_wall_hanging(true);
-          wall_side = (wall_left ? -1 : 1);
+        // Horizontal velocity (push away from wall)
+        int wall_jump_xvel = get_ability(type(), jump_top_speed);
+        set_xvel(wall_jump_xvel * jump_direction);
+        direction = jump_direction;
 
-          // Reduce falling speed when latching
-          set_yvel(yvel() / 4);
-        }
-      }
-      else
-      {
-        // Not holding toward wall - reset counter
-        wall_hold = 0;
-
-        // If was hanging, detach and start coyote time
-        if (wall_hanging())
-        {
-          set_wall_hanging(false);
-          wall_coyote = settings.wall_coyote_frames;
-        }
+        set_gravity(1);
+        set_state(run_jump);
       }
     }
-    else
-    {
-      // Not falling - reset wall hold
-      wall_hold = 0;
-    }
-
-    // Wall hanging mechanics
-    if (wall_hanging())
-    {
-      // Slow down falling while hanging on wall
-      if (yvel() > 2)
-        set_yvel(2);
-
-      // Keep player pressed against wall
-      if (wall_side < 0)
-        set_xvel(-1);
-      else
-        set_xvel(1);
-    }
-
-    // Wall jump: jump while hanging or during coyote time
-    if ((wall_hanging() || wall_coyote > 0) && (cy < 0 || (button & 8)))
-    {
-      // Launch off the wall
-      set_wall_hanging(false);
-      wall_coyote = 0;
-
-      // Vertical velocity (same as normal jump)
-      set_yvel(get_ability(type(), jump_yvel));
-
-      // Horizontal velocity (push away from wall)
-      int wall_jump_xvel = get_ability(type(), jump_top_speed);
-      if (wall_side < 0)
-      {
-        // Was on left wall, jump right
-        set_xvel(wall_jump_xvel);
-        direction = 1;
-      }
-      else
-      {
-        // Was on right wall, jump left
-        set_xvel(-wall_jump_xvel);
-        direction = -1;
-      }
-
-      wall_side = 0;
-      set_gravity(1);
-      set_state(run_jump);
-    }
-
-    // Update coyote time countdown
-    if (wall_coyote > 0)
-      wall_coyote--;
   }
-  else if (!settings.wall_jump_enabled)
-  {
-    // Wall jump disabled - reset all state
-    set_wall_hanging(false);
-    wall_side = 0;
-    wall_coyote = 0;
-    wall_hold = 0;
-  }
-  // ====== END WALL JUMP MECHANICS ======
-
   // ====== END WALL JUMP MECHANICS ======
 
 
