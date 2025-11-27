@@ -29,6 +29,20 @@ public:
 	bool linear_filter; // Use linear filtering
 	int hires;					// Enable hires screens and icons
 
+	// frame pacing
+	int fps_limit; // 0 = uncapped, otherwise target FPS (eg. 30/60/120)
+
+	// gameplay tuning
+	int wall_coyote_frames; // wall-jump grace frames after releasing from wall (default 60)
+	int wall_hang_hold_frames; // frames to hold toward wall before latch (default 60)
+
+	// debug
+	bool wall_debug_overlay; // show wall-hang debug overlay (Alt+N toggles)
+
+	// visual effects
+	bool lights_overlay_enabled; // enable light/glow overlay composited by the renderer
+	bool interpolated_sprites_enabled; // enable AI-interpolated 60 FPS sprite animations (4x frames)
+
 	// sound
 	bool mono;
 	bool no_sound;
@@ -66,6 +80,7 @@ public:
 	int b3; // weapon prev
 	int b4; // weapon next
 	int bt; // bullet time
+	int jump; // jump key (separate from directional up)
 
 	// controller settings
 	bool ctr_aim;															// enable

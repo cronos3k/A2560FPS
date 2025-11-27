@@ -28,6 +28,11 @@
 #include "clisp.h"
 #include "lisp_gc.h"
 #include "profile.h"
+#include "interp_loader.h"
+#include "sdlport/setup.h"
+#include <string.h>
+
+extern Settings settings;
 
 char **object_names;
 int total_objects;
@@ -728,6 +733,52 @@ void game_object::draw_predator()
 
 }
 
+// Helper function to get interpolated sprite collection name for an object type
+// Returns NULL if this object type doesn't have interpolated sprites
+static const char *get_interp_collection_name(int obj_type)
+{
+    // Runtime discovery: Check object name against known sprite collections
+    if (obj_type >= 0 && obj_type < total_objects && object_names != NULL)
+    {
+        const char *name = object_names[obj_type];
+        if (name != NULL)
+        {
+            // Match against our available interpolated sprite collections
+            // Collections: "bigexp", "aliens", "droid", "fire"
+
+            // Check for explosion sprites
+            if (strstr(name, "bigexp") != NULL ||
+                strstr(name, "explosion") != NULL ||
+                strstr(name, "explode") != NULL)
+            {
+                return "bigexp";
+            }
+
+            // Check for alien sprites
+            if (strstr(name, "alien") != NULL)
+            {
+                return "aliens";
+            }
+
+            // Check for droid sprites
+            if (strstr(name, "droid") != NULL ||
+                strstr(name, "robot") != NULL)
+            {
+                return "droid";
+            }
+
+            // Check for fire sprites
+            if (strstr(name, "fire") != NULL ||
+                strstr(name, "flame") != NULL)
+            {
+                return "fire";
+            }
+        }
+    }
+
+    return NULL;  // No interpolated sprites for this object type
+}
+
 void game_object::drawer()
 {
   if (morph_status())
@@ -744,7 +795,33 @@ void game_object::drawer()
       draw_trans(fade_count(),fade_max());
     else
     {
-      TransImage *cpict=picture();
+      // Try to use interpolated sprites if enabled
+      TransImage *cpict = NULL;
+      figure *interp_fig = NULL;
+
+      if (settings.interpolated_sprites_enabled && interp_sprite_manager)
+      {
+        const char *collection = get_interp_collection_name(otype);
+        if (collection && interp_sprite_manager->has_interpolated_data(collection))
+        {
+          float render_offset = get_render_frame_offset();
+          interp_fig = interp_sprite_manager->get_interpolated_figure(
+              collection, current_frame, render_offset, total_frames());
+
+          if (interp_fig)
+          {
+            cpict = (direction > 0) ? interp_fig->forward : interp_fig->backward;
+          }
+        }
+      }
+
+      // Fall back to original sprite if no interpolated sprite available
+      if (!cpict)
+      {
+        cpict = picture();
+      }
+
+      // Render the sprite (interpolated or original)
       cpict->PutImage(main_screen,
                ivec2((direction<0 ? x-(cpict->Size().x-x_center()-1) : x-x_center())-current_vxadd,
                      y-cpict->Size().y+1-current_vyadd));

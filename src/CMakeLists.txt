@@ -70,6 +70,7 @@ add_executable(abuse
     devsel.cpp devsel.h
     crc.cpp crc.h
     gamma.cpp gamma.h
+    interp_loader.cpp interp_loader.h
     id.h isllist.h sbar.h
     nfserver.h
     ui/volumewindow.cpp ui/volumewindow.h
@@ -99,21 +100,16 @@ if(APPLE)
     target_link_libraries(abuse "-framework CoreFoundation")
 endif()
 
-# add_executable(abuse-tool
-# 	tool/abuse-tool.cpp
-# 	crc.cpp crc.h
-# 	tool/AR_SPEC.cpp tool/AR_SPEC.h
-# 	tool/AR_Help.cpp tool/AR_Help.h)
+add_executable(abuse-tool
+    tool/abuse-tool.cpp
+    crc.cpp crc.h)
 
 if(APPLE)
     # Link CoreFoundation
     target_link_libraries(abuse "-framework CoreFoundation")
 endif()
 
-# add_executable(abuse-tool tool/abuse-tool.cpp crc.cpp crc.h)
-
-
-# target_link_libraries(abuse-tool imlib)
+target_link_libraries(abuse-tool imlib)
 
 include_directories(
     ${abuse_SOURCE_DIR}/src
@@ -128,11 +124,46 @@ if(WIN32)
     install(TARGETS abuse
         RUNTIME DESTINATION "."
         LIBRARY DESTINATION ".")
-    # install(TARGETS abuse-tool
-    #     RUNTIME DESTINATION "."
-    #     LIBRARY DESTINATION ".")
+    # Copy dependent runtime DLLs (e.g., Ogg/Vorbis/WavPack) next to the exe
+    add_custom_command(TARGET abuse POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_RUNTIME_DLLS:abuse> $<TARGET_FILE_DIR:abuse>
+        COMMAND_EXPAND_LISTS)
+    install(FILES $<TARGET_RUNTIME_DLLS:abuse> DESTINATION "." )
+    install(TARGETS abuse-tool
+        RUNTIME DESTINATION "."
+        LIBRARY DESTINATION ".")
+
+    add_executable(spe-dump
+        tool/spe_dump.cpp
+        crc.cpp crc.h
+        file_utils.cpp file_utils.h)
+    target_link_libraries(spe-dump imlib)
+    install(TARGETS spe-dump
+        RUNTIME DESTINATION "."
+        LIBRARY DESTINATION ".")
     install(FILES $<TARGET_FILE:SDL2::SDL2> DESTINATION ".")
     install(FILES $<TARGET_FILE:SDL2_mixer::SDL2_mixer> DESTINATION ".")
+
+    # Also scan the executable for transitive runtime DLLs (e.g., Ogg/Vorbis/WavPack)
+    set(_bundle_dirs "${CMAKE_BINARY_DIR}/src/Release;${CMAKE_BINARY_DIR}/src/Debug")
+    if(DEFINED VCPKG_INSTALLED_DIR AND DEFINED VCPKG_TARGET_TRIPLET)
+        list(APPEND _bundle_dirs "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/bin")
+    endif()
+
+    add_custom_command(TARGET abuse POST_BUILD
+        COMMAND ${CMAKE_COMMAND}
+            -D BIN=$<TARGET_FILE:abuse>
+            -D DEST=$<TARGET_FILE_DIR:abuse>
+            -D RUNTIME_DIRS="${_bundle_dirs}"
+            -P "${abuse_SOURCE_DIR}/cmake/bundle_runtime.cmake"
+        VERBATIM)
+
+    install(CODE
+        "execute_process(COMMAND \"${CMAKE_COMMAND}\"
+            -D BIN=\"${CMAKE_INSTALL_PREFIX}/abuse.exe\"
+            -D DEST=\"${CMAKE_INSTALL_PREFIX}\"
+            -D RUNTIME_DIRS=\"${_bundle_dirs}\"
+            -P \"${abuse_SOURCE_DIR}/cmake/bundle_runtime.cmake\")")
 else()
     # Under Linux, we want the tools in bin
     install(TARGETS abuse RUNTIME DESTINATION bin

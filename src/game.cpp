@@ -71,10 +71,15 @@
 #include "chat.h"
 #include "demo.h"
 #include "netcfg.h"
+// Key constants for Alt detection
+#include "keys.h"
+// For player object fields (wall_hang debug)
+#include "objects.h"
 
 //AR
 #include "sdlport/setup.h"
 #include <SDL_timer.h>
+#include "interp_loader.h"
 //
 
 extern CrcManager *net_crcs;
@@ -99,6 +104,8 @@ char req_name[100];
 extern uint8_t chatting_enabled;
 
 Settings settings;
+// Debug overlay for wall-hang: default off, can be toggled via Alt+N
+static int wall_dbg_on = 0;
 
 // Enable TCP/IP driver
 #if HAVE_NETWORK
@@ -669,6 +676,105 @@ static void post_render()
   }
 }
 
+void LightOverlay_AddWorldGlow(int world_x, int world_y, int radius, uint8_t alpha,
+                               uint8_t red, uint8_t green, uint8_t blue)
+{
+  if (!LightOverlay_Enabled())
+    return;
+
+  for (view *v = player_list; v; v = v->next)
+  {
+    if (!v->drawable())
+      continue;
+
+    int sx = v->m_aa.x + (world_x - v->xoff());
+    int sy = v->m_aa.y + (world_y - v->yoff());
+    LightOverlay_AddRadialScreen(sx, sy, radius, alpha, red, green, blue);
+    int width = v->m_bb.x - v->m_aa.x + 1;
+    int height = v->m_bb.y - v->m_aa.y + 1;
+    LightOverlay_AddViewRect(v->m_aa.x, v->m_aa.y, width, height);
+  }
+}
+
+static inline int clamp_shift(int value)
+{
+    if (value < 0)
+        return 0;
+    if (value > 12)
+        return 12;
+    return value;
+}
+
+static int project_light_radius(const light_source *ls, bool horizontal_axis)
+{
+    if (ls->type == 9)
+    {
+        int span = horizontal_axis ? ls->xshift : ls->yshift;
+        if (span < 8)
+            span = 8;
+        return span / 2;
+    }
+
+    int shift = clamp_shift(horizontal_axis ? ls->xshift : ls->yshift);
+    int radius = ls->outer_radius >> shift;
+    if (radius < 4)
+        radius = 4;
+    return radius;
+}
+
+static uint8_t overlay_alpha_for_light(const light_source *ls)
+{
+    int falloff = ls->outer_radius - ls->inner_radius;
+    if (falloff < 0)
+        falloff = ls->outer_radius;
+    int alpha = 64 + falloff / 4;
+    if (ls->type == 9)
+        alpha += 32;
+    if (alpha > 220)
+        alpha = 220;
+    if (alpha < 32)
+        alpha = 32;
+    return static_cast<uint8_t>(alpha);
+}
+
+static void add_registered_light_glows(view *v, int32_t xoff, int32_t yoff)
+{
+    if (!LightOverlay_Enabled() || !first_light_source)
+        return;
+
+    const int view_w = v->m_bb.x - v->m_aa.x + 1;
+    const int view_h = v->m_bb.y - v->m_aa.y + 1;
+    LightOverlay_AddViewRect(v->m_aa.x, v->m_aa.y, view_w, view_h);
+    const int world_x1 = xoff - 64;
+    const int world_y1 = yoff - 64;
+    const int world_x2 = xoff + view_w + 64;
+    const int world_y2 = yoff + view_h + 64;
+
+    for (light_source *ls = first_light_source; ls; ls = ls->next)
+    {
+        int center_x = ls->x;
+        int center_y = ls->y;
+        if (ls->type == 9)
+        {
+            center_x += ls->xshift / 2;
+            center_y += ls->yshift / 2;
+        }
+
+        int radius = Max(project_light_radius(ls, true),
+                         project_light_radius(ls, false));
+
+        if (center_x + radius < world_x1 || center_x - radius > world_x2 ||
+            center_y + radius < world_y1 || center_y - radius > world_y2)
+        {
+            continue;
+        }
+
+        int screen_x = v->m_aa.x + (center_x - xoff);
+        int screen_y = v->m_aa.y + (center_y - yoff);
+        LightOverlay_AddRadialScreen(screen_x, screen_y, radius, overlay_alpha_for_light(ls));
+    }
+}
+
 void Game::draw_map(view *v, int interpolate)
 {
   backtile *bt;
@@ -1062,6 +1168,8 @@ void Game::draw_map(view *v, int interpolate)
   }  else
     main_screen->dirt_on();
 
+  add_registered_light_glows(v, xoff, yoff);
+
   rand_on = ro;                // restore random start in case in draw funs moved it
                                // ... not every machine will draw the same thing
 
@@ -1347,6 +1455,9 @@ Game::Game(int argc, char **argv)
   if(has_joystick) dprintf("detected\n");
   else dprintf("not detected\n");
 
+  // Initialize wall-hang debug overlay from config
+  wall_dbg_on = settings.wall_debug_overlay ? 1 : 0;
+
     // Clean up that old crap
     // char *fastpath = (char *)malloc(strlen(get_save_filename_prefix()) + 13);
     // sprintf(fastpath, "%sfastload.dat", get_save_filename_prefix());
@@ -1383,6 +1494,9 @@ Game::Game(int argc, char **argv)
   //   exit(0);
   // }
   pal->load();
+
+  // Initialize interpolated sprites system (if enabled in settings)
+  init_interp_sprites();
 
   recalc_local_view_space();   // now that we know what size the screen is...
 
@@ -1484,6 +1598,7 @@ Game::Game(int argc, char **argv)
 
 time_marker *led_last_time = NULL;
 static float avg_ms = 1000.0f / 15, possible_ms = 1000.0f / 15;
+// moved to top of file
 
 void Game::toggle_delay()
 {
@@ -1552,6 +1667,47 @@ void Game::update_screen()
     }
 
     show_time();
+
+    if (wall_dbg_on)
+    {
+      // Tiny on-screen wall hang debug for the local player (top-left of view)
+      for(view *f = first_view; f; f = f->next)
+      {
+        if(!f->local_player() || !f->m_focus)
+          continue;
+
+        game_object *o = f->m_focus;
+        // Current input intentions
+        int sx = f->x_suggestion;
+        int sy = f->y_suggestion;
+        int up = (sy < 0) ? 1 : 0;
+        int toward = (sx != 0) ? 1 : 0;
+
+        // Proximity probes (1px/2px) both sides
+        int nearL = 0, nearR = 0;
+        {
+          int32_t tx = -1, ty = 0; (void)o->try_move(o->x, o->y, tx, ty, 3); if (tx == 0) nearL = 1;
+          tx = -2; ty = 0; (void)o->try_move(o->x, o->y, tx, ty, 3); if (tx == 0) nearL = 1;
+          tx = 1; ty = 0; (void)o->try_move(o->x, o->y, tx, ty, 3); if (tx == 0) nearR = 1;
+          tx = 2; ty = 0; (void)o->try_move(o->x, o->y, tx, ty, 3); if (tx == 0) nearR = 1;
+        }
+
+        char dbg1[96];
+        char dbg2[96];
+        snprintf(dbg1, sizeof(dbg1), "WH=%d H=%d/%d C=%d",
+                 o->wall_hanging() ? 1 : 0,
+                 (int)o->wall_hold,
+                 (int)settings.wall_hang_hold_frames,
+                 (int)o->wall_coyote);
+        snprintf(dbg2, sizeof(dbg2), "UP=%d TWD=%d NL=%d NR=%d",
+                 up, toward, nearL, nearR);
+
+        ivec2 p = f->m_aa + ivec2(4, 4);
+        console_font->PutString(main_screen, p, dbg1, wm->bright_color());
+        console_font->PutString(main_screen, p + ivec2(0, 10), dbg2, wm->bright_color());
+        break; // only draw for first local view
+      }
+    }
   }
 
   if(state == RUN_STATE && cache.prof_is_on())
@@ -1608,6 +1764,11 @@ void Game::get_input()
             else if(ev.type == EV_KEYRELEASE)
             {
                 set_key_down(ev.key, 0);
+                // Toggle wall-hang debug overlay on Alt+N
+                if ((ev.key == 'n' || ev.key == 'N') && (key_down(JK_ALT_L) || key_down(JK_ALT_R)))
+                {
+                    wall_dbg_on = !wall_dbg_on;
+                }
                 if(playing_state(state))
                 {
                     if(ev.key < 256)
@@ -2007,6 +2168,9 @@ extern void *current_demo;
 
 Game::~Game()
 {
+  // Shutdown interpolated sprites system
+  shutdown_interp_sprites();
+
   current_demo = NULL;
   if(first_view == player_list) first_view = NULL;
   while(player_list)
@@ -2400,19 +2564,22 @@ int main(int argc, char *argv[])
     net_send(1);
 
     static Uint32 last_tick_start = SDL_GetTicks();
-    static Uint32 last_physics_tick_time = SDL_GetTicks();
+    static double physics_accumulator_ms = 0.0;
 
-    const float target_frame_duration_ms = 1000.0f / 60.0f;
+    // Compute target frame duration from settings (0 = uncapped)
+    float target_frame_duration_ms = 0.0f;
+    if (settings.fps_limit > 0)
+        target_frame_duration_ms = 1000.0f / (float)settings.fps_limit;
 
     while (!g->done())
     {
       Uint32 tick_start = SDL_GetTicks();
-      Uint32 frame_duration_ms = tick_start - last_tick_start; // Calculate time since last frame
-
-      if (frame_duration_ms < target_frame_duration_ms && !g->no_delay)
+      Uint32 frame_duration_ms = tick_start - last_tick_start; // time since last frame
+      if (target_frame_duration_ms > 0.0f && frame_duration_ms < target_frame_duration_ms && !g->no_delay)
       {
-        SDL_Delay(target_frame_duration_ms - frame_duration_ms);
-        continue;
+        SDL_Delay((Uint32)(target_frame_duration_ms - frame_duration_ms));
+        tick_start = SDL_GetTicks();
+        frame_duration_ms = tick_start - last_tick_start;
       }
 
       music_check();
@@ -2436,11 +2603,13 @@ int main(int argc, char *argv[])
         g->draw(g->state == SCENE_STATE);
       }
 
-      Uint32 current_tick = SDL_GetTicks();
-      Uint32 physics_frame_time = current_tick - last_physics_tick_time;
-      bool physics_step = physics_frame_time >= settings.physics_update || g->no_delay; // if enough time has passed, we should do a physics step
+      // Fixed-timestep physics accumulator
+      double dt_ms = (double)settings.physics_update;
+      // Avoid spiral of death on huge frame spikes
+      if (frame_duration_ms > 250) frame_duration_ms = 250;
+      physics_accumulator_ms += (double)frame_duration_ms;
 
-      if (physics_frame_time > 100)
+      if (frame_duration_ms > 100)
       {
         // Frame panic detection - tracks loops that take too long (>100ms).
         // Increments panic counters that trigger automatic disabling of CPU-intensive
@@ -2455,28 +2624,18 @@ int main(int argc, char *argv[])
           massive_frame_panic--;
       }
 
-      if (physics_step)
+      // Gather local input once per frame (keeps controls responsive)
+      if (demo_man.current_state() != demo_manager::PLAYING)
+          g->get_input();
+
+      // Step physics in fixed quanta; cap steps to prevent spiral
+      const int max_physics_steps = 5;
+      int steps = 0;
+      while ((physics_accumulator_ms >= dt_ms || g->no_delay) && steps < max_physics_steps)
       {
         if (demo_man.current_state() == demo_manager::NORMAL)
         {
           net_receive();
-        }
-      }
-
-      // TEMPORARY FIX FOR HIGH-FRAMERATE MULTIPLAYER COMPATIBILITY
-      // Certain inputs (e.g., pressing SPACEBAR to reset after death) modify the game's underlying state.
-      // In multiplayer mode, if the player is dead, we sync this with physics steps to ensure the server
-      // processes it correctly. It might have some second-order effects I don't understand yet.
-      //
-      // Optimally, we would separate mouse input and rendering from game steps and networking.
-      if (g->first_view->m_focus->aistate() == 3 || physics_step)
-        if (demo_man.current_state() != demo_manager::PLAYING)
-          g->get_input();
-
-      if (physics_step)
-      {
-        if (demo_man.current_state() == demo_manager::NORMAL)
-        {
           net_send();
         }
         else
@@ -2485,11 +2644,11 @@ int main(int argc, char *argv[])
         }
 
         service_net_request();
-
-        // process all the objects in the world
         g->step();
 
-        last_physics_tick_time = tick_start;
+        if (!g->no_delay)
+            physics_accumulator_ms -= dt_ms;
+        steps++;
       }
 
       // see if a request for a level load was made during the last tick

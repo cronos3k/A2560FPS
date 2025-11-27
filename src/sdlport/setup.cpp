@@ -101,8 +101,16 @@ Settings::Settings()
 	// this->virtual_height  = 200;
 	this->screen_width = 640;
 	// this->screen_height  = 400;
-	this->linear_filter = false; // don't "anti-alias"
-	this->hires = 0;
+    this->linear_filter = false; // don't "anti-alias"
+    this->hires = 0;
+    // frame pacing
+    this->fps_limit = 60; // default cap; 0 = uncapped
+    // gameplay tuning
+    this->wall_coyote_frames = 60; // 1s at 60 Hz by default
+    this->wall_hang_hold_frames = 12; // ~0.2s at 60 Hz (adjust in config)
+    this->wall_debug_overlay = false; // start with overlay hidden
+    this->lights_overlay_enabled = true; // enable light/glow overlay by default
+    this->interpolated_sprites_enabled = false; // disable AI-interpolated sprites by default (preserve original behavior)
 
 	// sound
 	this->mono = false;			// disable stereo sound
@@ -116,7 +124,8 @@ Settings::Settings()
 	this->local_save = true;
 	this->grab_input = false;	 // don't grab the input
 	this->editor = false;			 // disable editor mode
-	this->physics_update = 1000 / 15; // original 65ms/15 FPS
+	// Fixed physics timestep (ms per update). Default: 60 Hz on modern hardware.
+	this->physics_update = 1000 / 60;
 	this->mouse_scale = 0;		 // match desktop
 	this->big_font = false;
 	this->language = "english";
@@ -140,8 +149,10 @@ Settings::Settings()
 	this->b1 = key_value("SHIFT_L"); // special
 	this->b2 = key_value("f");			 // fire
 	this->b3 = key_value("q");			 // weapons
-	this->b4 = key_value("e");
-	this->bt = key_value("CTRL_L"); // special2, bulettime
+  this->b4 = key_value("e");
+  this->bt = key_value("CTRL_L"); // special2, bulettime
+  // Default jump on Space
+  this->jump = key_value("SPACE");
 
 	// controller settings
 	this->ctr_aim = false; // controller overide disabled
@@ -193,13 +204,30 @@ bool Settings::CreateConfigFile()
 	fprintf(out, "borderless=%d\n", borderless);
 	fprintf(out, "vsync=%d\n\n", vsync);
 
-	fprintf(out, "; Virtual resolution (internal game resolution). If virtual_height is not specified it is calculated to match aspect ratio of the window\n");
-	fprintf(out, "virtual_width=%d\n", virtual_width);
-	fprintf(out, "; virtual_height=%d\n\n", virtual_height);
+    fprintf(out, "; Virtual resolution (internal game resolution). If virtual_height is not specified it is calculated to match aspect ratio of the window\n");
+    fprintf(out, "virtual_width=%d\n", virtual_width);
+    fprintf(out, "; virtual_height=%d\n\n", virtual_height);
 
-	fprintf(out, "; Screen resolution\n");
-	fprintf(out, "; screen_width=%d\n", screen_width);
-	fprintf(out, "; screen_height=%d\n\n", screen_height);
+    fprintf(out, "; Screen resolution\n");
+    fprintf(out, "; screen_width=%d\n", screen_width);
+    fprintf(out, "; screen_height=%d\n\n", screen_height);
+
+    fprintf(out, "; Frame pacing: 0 = uncapped, otherwise target FPS (e.g., 30/60/120)\n");
+    fprintf(out, "fps_limit=%d\n\n", this->fps_limit);
+
+    fprintf(out, "; GAMEPLAY\n");
+    fprintf(out, "; Wall jump grace window after letting go of the wall (frames)\n");
+    fprintf(out, "wall_coyote_frames=%d\n", this->wall_coyote_frames);
+    fprintf(out, "; Hold toward-wall time before latching (frames)\n");
+    fprintf(out, "wall_hang_hold_frames=%d\n", this->wall_hang_hold_frames);
+
+    fprintf(out, "; DEBUG\n");
+    fprintf(out, "; Show wall-hang debug overlay (Alt+N toggles in-game)\n");
+    fprintf(out, "wall_debug_overlay=%d\n", this->wall_debug_overlay ? 1 : 0);
+    fprintf(out, "; Enable light/glow overlay for particles/explosions\n");
+    fprintf(out, "lights_overlay_enabled=%d\n", this->lights_overlay_enabled ? 1 : 0);
+    fprintf(out, "; Enable AI-interpolated 60 FPS sprite animations (requires interpolated sprite data in AIWork/frame-interpolation/final/)\n");
+    fprintf(out, "interpolated_sprites_enabled=%d\n\n", this->interpolated_sprites_enabled ? 1 : 0);
 
 	fprintf(out, "; Enable high resolution screens and font\n");
 	fprintf(out, "hires=%d\n", hires);
@@ -244,13 +272,14 @@ bool Settings::CreateConfigFile()
 	fprintf(out, "language=%s\n\n", this->language.c_str());
 
 	fprintf(out, "; PLAYER CONTROLS\n\n");
-	fprintf(out, "; Key mappings\n");
-	fprintf(out, "left=a\n");
-	fprintf(out, "right=d\n");
-	fprintf(out, "up=w\n");
-	fprintf(out, "down=s\n");
-	fprintf(out, "special=SHIFT_L\n");
-	fprintf(out, "fire=f\n");
+  fprintf(out, "; Key mappings\n");
+  fprintf(out, "left=a\n");
+  fprintf(out, "right=d\n");
+  fprintf(out, "up=w\n");
+  fprintf(out, "down=s\n");
+  fprintf(out, "jump=SPACE\n");
+  fprintf(out, "special=SHIFT_L\n");
+  fprintf(out, "fire=f\n");
 	fprintf(out, "weapon_prev=q\n");
 	fprintf(out, "weapon_next=e\n");
 	fprintf(out, "special2=CTRL_L\n\n");
@@ -362,10 +391,22 @@ bool Settings::ReadConfigFile()
 			this->screen_width = AR_ToInt(value);
 		else if (attr == "screen_height")
 			this->screen_height = AR_ToInt(value);
-		else if (attr == "linear_filter")
-			this->linear_filter = AR_ToBool(value);
-		else if (attr == "hires")
-			this->hires = AR_ToInt(value);
+        else if (attr == "linear_filter")
+            this->linear_filter = AR_ToBool(value);
+        else if (attr == "hires")
+            this->hires = AR_ToInt(value);
+        else if (attr == "fps_limit")
+            this->fps_limit = AR_ToInt(value);
+        else if (attr == "wall_coyote_frames")
+            this->wall_coyote_frames = AR_ToInt(value);
+        else if (attr == "wall_hang_hold_frames")
+            this->wall_hang_hold_frames = AR_ToInt(value);
+        else if (attr == "wall_debug_overlay")
+            this->wall_debug_overlay = AR_ToBool(value);
+        else if (attr == "lights_overlay_enabled")
+            this->lights_overlay_enabled = AR_ToBool(value);
+        else if (attr == "interpolated_sprites_enabled")
+            this->interpolated_sprites_enabled = AR_ToBool(value);
 
 		// sound
 		else if (attr == "mono")
@@ -420,11 +461,13 @@ bool Settings::ReadConfigFile()
 			if (!ControllerButton(attr, value))
 				this->right = key_value(value.c_str());
 		}
-		else if (attr == "special")
-		{
-			if (!ControllerButton(attr, value))
-				this->b1 = key_value(value.c_str());
-		}
+        else if (attr == "jump")
+            this->jump = key_value(value.c_str());
+        else if (attr == "special")
+            {
+                if (!ControllerButton(attr, value))
+                    this->b1 = key_value(value.c_str());
+            }
 		else if (attr == "fire")
 		{
 			if (!ControllerButton(attr, value))
@@ -695,12 +738,14 @@ int get_key_binding(char const *dir, int i)
 		return settings.b2;
 	else if (strcasecmp(dir, "b3") == 0)
 		return settings.b3;
-	else if (strcasecmp(dir, "b4") == 0)
-		return settings.b4;
-	else if (strcasecmp(dir, "bt") == 0)
-		return settings.bt;
+    else if (strcasecmp(dir, "b4") == 0)
+        return settings.b4;
+    else if (strcasecmp(dir, "bt") == 0)
+        return settings.bt;
+    else if (strcasecmp(dir, "jump") == 0)
+        return settings.jump;
 
-	return 0;
+    return 0;
 }
 
 std::string get_ctr_binding(std::string c)
