@@ -17,3 +17,5 @@ AIWork/__pycache__/
 # Temporary files
 *.patch
 *.backup
+AIWork/SUPIR_v101/
+AIWork/SUPIR_v101.zip
